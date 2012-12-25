@@ -7,3 +7,11 @@ function bpasswdDeriveKey() {
   gClipboardHelper.copyString(dkey);
   document.getElementById("bpasswd-dkey").value = dkey;
 }
+
+function bpasswdToggleBar() {
+  document.getElementById("bpasswd-salt").value = "";
+  document.getElementById("bpasswd-password").value = "";
+  document.getElementById("bpasswd-dkey").value = "";
+  var toolbar = document.getElementById('bpasswdToolbar');
+  toolbar.collapsed = !toolbar.collapsed;
+}

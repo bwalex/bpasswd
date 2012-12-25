@@ -27,7 +27,7 @@
 	</keyset>
 
 	<commandset id="mainCommandSet">
-		<command id="bpasswd_command_toggle_toolbar" oncommand="var toolbar = document.getElementById('bpasswdToolbar'); toolbar.collapsed = !toolbar.collapsed;"/>
+		<command id="bpasswd_command_toggle_toolbar" oncommand="bpasswdToggleBar();"/>
 	</commandset>
 </overlay>
 
