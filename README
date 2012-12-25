@@ -1,0 +1,25 @@
+A strong password generator using bcrypt for key derivation in a convenient toolbar.
+
+
+The salt is hashed using HMAC keyed with the hashed password - this salt is then used, alongside with the provided master password, to generate the final key using bcrypt, an algorithm designed to be computationally 
+expensive.
+
+The keyed HMAC expansion for the salt prevents rainbow tables generated for a fixed salt - this way the salt provided to the derivation function(bcrypt) is also a function of the key.
+
+Press 'F9' to get the toolbar to show - pressing F9 again, the toolbar will hide. Just type in your master password, a salt for a given page (e.g. "amazon" or "gmail"), click "derive key" and the derived key will be 
+shown and also copied into the clipboard.
+
+
+
+
+
+
+
+The salt is hashed using HMAC keyed with the hashed password - this salt is then used, alongside with the provided master password, to generate the final key using bcrypt, an algorithm designed to be computationally 
+expensive.
+
+The keyed HMAC expansion for the salt prevents rainbow tables generated for a fixed salt - this way the salt provided to the derivation function(bcrypt) is also a function of the key.
+
+Press the toolbar button to see the poup. Just type in your master password, a salt for a given page (e.g. "amazon" or "gmail"), click "derive key" and the derived key will be 
+shown and also copied into the clipboard.
+
