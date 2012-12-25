@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://bpasswd/skin/skin.css" type="text/css"?>
+<!DOCTYPE bpasswd SYSTEM "chrome://bpasswd/locale/translations.dtd">
+<overlay id="sample" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script src="helper.js" />
+	<script src="encdec.js" />
+	<script src="sha1.js" />
+	<script src="sha256.js" />
+	<script src="blowfish.js" />
+	<script src="hmac.js" />
+	<script src="bcrypt.js" />
+	<script src="bpasswd.js" />
+	<script src="bpasswd-ff.js" />
+	<toolbox id="navigator-toolbox">
+		<toolbar align="center" id="bpasswdToolbar" toolbarname="BPasswd toolbar" class="chromeclass-toolbar" chromeclass="toolbar" context="toolbar-context-menu" key="bpasswd_key_toggle_toolbar">
+			<label control="bpasswd-password" value="Master Password:"/>
+			<textbox id="bpasswd-password" type="password" label="Password"/>
+			<label control="bpasswd-salt" value="Salt:"/>
+			<textbox id="bpasswd-salt" label="Salt"/>
+			<toolbarbutton id="bpasswd-derive-key" label="Derive Key" oncommand="bpasswdDeriveKey();"/>
+			<textbox id="bpasswd-dkey" size="30" label="Key"/>
+		</toolbar>
+	</toolbox>
+
+	<keyset id="mainKeyset">
+		<key id="bpasswd_key_toggle_toolbar" keycode="VK_F9" keytext="F9" command="bpasswd_command_toggle_toolbar"/>
+	</keyset>
+
+	<commandset id="mainCommandSet">
+		<command id="bpasswd_command_toggle_toolbar" oncommand="var toolbar = document.getElementById('bpasswdToolbar'); toolbar.collapsed = !toolbar.collapsed;"/>
+	</commandset>
+</overlay>
+
