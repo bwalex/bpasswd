@@ -5,7 +5,10 @@ function bpasswdDeriveKey() {
   var dkey = BPasswd.generate(salt, pass, cost);
   const gClipboardHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);
   gClipboardHelper.copyString(dkey);
-  document.getElementById("bpasswd-dkey").value = dkey;
+  var dkel = document.getElementById("bpasswd-dkey");
+  dkel.value = dkey;
+  dkel.focus();
+  dkel.select();
 }
 
 function bpasswdToggleBar() {
@@ -14,4 +17,10 @@ function bpasswdToggleBar() {
   document.getElementById("bpasswd-dkey").value = "";
   var toolbar = document.getElementById('bpasswdToolbar');
   toolbar.collapsed = !toolbar.collapsed;
+}
+
+
+function bpasswdReveal() {
+  var type = document.getElementById("bpasswd-show-pwd").checked ? null : "password";
+  document.getElementById("bpasswd-password").type = type;
 }

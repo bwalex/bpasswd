@@ -14,11 +14,12 @@
 	<toolbox id="navigator-toolbox">
 		<toolbar align="center" id="bpasswdToolbar" toolbarname="BPasswd toolbar" class="chromeclass-toolbar" chromeclass="toolbar" context="toolbar-context-menu" key="bpasswd_key_toggle_toolbar">
 			<label control="bpasswd-password" value="Master Password:"/>
-			<textbox id="bpasswd-password" type="password" label="Password"/>
+			<textbox id="bpasswd-password" type="password" label="Password" tabindex="1"/>
 			<label control="bpasswd-salt" value="Salt:"/>
-			<textbox id="bpasswd-salt" label="Salt"/>
-			<toolbarbutton id="bpasswd-derive-key" label="Derive Key" oncommand="bpasswdDeriveKey();"/>
+			<textbox id="bpasswd-salt" label="Salt" tabindex="2" />
+			<toolbarbutton id="bpasswd-derive-key" label="Derive Key" tabindex="3" oncommand="bpasswdDeriveKey();"/>
 			<textbox id="bpasswd-dkey" size="30" label="Key"/>
+			<checkbox id="bpasswd-show-pwd" label="Reveal master" tabindex="-1" oncommand="bpasswdReveal();"/>
 		</toolbar>
 	</toolbox>
 
