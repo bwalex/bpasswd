@@ -10,6 +10,8 @@
       <label for="bpasswd-password">Master password: </label>
     </span>
     <input id="bpasswd-password" type="password" />
+    <input id="bpasswd-show-pwd" type="checkbox" tabindex="-1" onchange="bpasswdReveal();" />
+    <label for="bpasswd-show-pwd">Reveal</label>
   </div>
   <div>
     <span style="float: left; width: 180px;">
@@ -39,6 +41,20 @@
       document.getElementById("bpasswd-password").value = "";
       document.getElementById("bpasswd-salt").value = "";
       document.getElementById("bpasswd-dkey").value = "";
+    }
+
+    function bpasswdReveal() {
+      var ip = document.getElementById("bpasswd-show-pwd");
+      var type = ip.checked ? "text" : "password";
+      var c = document.getElementById("bpasswd-password").value;
+
+      var ne = document.createElement("input");
+      ne.type = type;
+      ne.setAttribute('id', "bpasswd-password");
+      ne.value = c;
+
+      ip.parentNode.replaceChild(ne,
+          document.getElementById("bpasswd-password"));
     }
 
     function bpasswdDeriveKey() {
