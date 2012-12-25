@@ -16,5 +16,21 @@ function bpasswdClearAll() {
   document.getElementById("bpasswd-dkey").value = "";
 }
 
+function bpasswdReveal() {
+  var ip = document.getElementById("bpasswd-show-pwd");
+  var type = ip.checked ? "text" : "password";
+  var c = document.getElementById("bpasswd-password").value;
+
+  var ne = document.createElement("input");
+  ne.type = type;
+  ne.setAttribute('id', "bpasswd-password");
+  ne.value = c;
+
+  ip.parentNode.replaceChild(ne,
+      document.getElementById("bpasswd-password"));
+}
+
 document.getElementById("bpasswd-derive-key").onclick = bpasswdDeriveKey;
 document.getElementById("bpasswd-clear-all").onclick = bpasswdClearAll;
+
+document.getElementById("bpasswd-show-pwd").onchange = bpasswdReveal;
