@@ -3,7 +3,7 @@ function bpasswdDeriveKey() {
   var salt = document.getElementById("bpasswd-salt").value;
   var pass = document.getElementById("bpasswd-password").value;
   var dkey = BPasswd.generate(salt, pass, cost);
-  var dkEl = document.getElementById("bpasswd-dkey")
+  var dkEl = document.getElementById("bpasswd-dkey");
   dkEl.value = dkey;
   dkEl.focus();
   dkEl.select();
