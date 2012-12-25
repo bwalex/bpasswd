@@ -30,6 +30,7 @@ clean-chrome:
 	${RM} chrome/hmac.js
 	${RM} chrome/sha1.js
 	${RM} chrome/sha256.js
+	${RM} bpasswd-chrome.zip
 
 clean-firefox:
 	${RM} firefox/content/bcrypt.js
@@ -40,3 +41,19 @@ clean-firefox:
 	${RM} firefox/content/hmac.js
 	${RM} firefox/content/sha1.js
 	${RM} firefox/content/sha256.js
+	${RM} bpasswd-firefox.zip
+
+package-chrome2:
+	cd chrome; zip -r ../bpasswd-chrome.zip *
+
+package-firefox2:
+	cd firefox; zip -r ../bpasswd-firefox.zip *
+
+package-chrome: clean-chrome populate-chrome package-chrome2 clean-chrome
+
+package-firefox: clean-firefox populate-firefox package-firefox2 clean-firefox
+
+
+package: package-chrome package-firefox
+clean: clean-chrome clean-firefox
+populate: populate-firefox populate-chrome
