@@ -1,5 +1,7 @@
 CP= cp
-JS= bcrypt.js blowfish.js bpasswd.js encdec.js helper.js hmac.js sha1.js sha256.js
+MV= mv
+RM= rm -f
+ZIP= zip
 
 populate-chrome:
 	${CP} web/bcrypt.js     chrome/
@@ -30,7 +32,6 @@ clean-chrome:
 	${RM} chrome/hmac.js
 	${RM} chrome/sha1.js
 	${RM} chrome/sha256.js
-	${RM} bpasswd-chrome.zip
 
 clean-firefox:
 	${RM} firefox/content/bcrypt.js
@@ -41,17 +42,16 @@ clean-firefox:
 	${RM} firefox/content/hmac.js
 	${RM} firefox/content/sha1.js
 	${RM} firefox/content/sha256.js
-	${RM} bpasswd-firefox.zip
 
-package-chrome2:
-	cd chrome; zip -r ../bpasswd-chrome.zip *
 
-package-firefox2:
-	cd firefox; zip -r ../bpasswd-firefox.zip *
+package-chrome: clean-chrome populate-chrome
+	${RM} bpasswd-chrome.zip
+	cd chrome; ${ZIP} -r ../bpasswd-chrome.zip *
 
-package-chrome: clean-chrome populate-chrome package-chrome2 clean-chrome
-
-package-firefox: clean-firefox populate-firefox package-firefox2 clean-firefox
+package-firefox: clean-firefox populate-firefox
+	${RM} bpasswd-firefox.xpi
+	cd firefox; ${ZIP} -r ../bpasswd-firefox.zip *
+	${MV} bpasswd-firefox.zip bpasswd-firefox.xpi
 
 
 package: package-chrome package-firefox
