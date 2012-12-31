@@ -1,7 +1,6 @@
 content		bpasswd		content/
 content		bpasswd		content/		contentaccessible=yes
 overlay chrome://browser/content/browser.xul chrome://bpasswd/content/browser.xul
-locale		bpasswd		en-US		locale/en-US/
-locale		bpasswd		en-GB		locale/en-US/
+locale		bpasswd		en-US		locale/en_US/
 skin		bpasswd		classic/1.0	skin/
 style chrome://global/content/customizeToolbar.xul chrome://bpasswd/skin/skin.css

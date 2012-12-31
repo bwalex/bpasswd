@@ -1,4 +1,5 @@
 <!ENTITY derivekey "Derive Key">
+<!ENTITY derivedkey "Derived key">
 <!ENTITY masterpwd "Master password">
 <!ENTITY salt "Salt">
-<!ENTITY reveal "Reveal master">
+<!ENTITY reveal "Reveal">

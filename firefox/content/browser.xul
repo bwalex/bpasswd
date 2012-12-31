@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://bpasswd/skin/skin.css" type="text/css"?>
 <!DOCTYPE bpasswd SYSTEM "chrome://bpasswd/locale/translations.dtd">
-<overlay id="sample" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<overlay id="bpasswd-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<script src="helper.js" />
 	<script src="encdec.js" />
 	<script src="sha1.js" />
@@ -11,24 +11,40 @@
 	<script src="bcrypt.js" />
 	<script src="bpasswd.js" />
 	<script src="bpasswd-ff.js" />
+
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbarbutton id="bpasswd-button" label="BPasswd" tooltiptext="Test tooltip" popup="bpasswd-panel"/>
+	</toolbarpalette>
+
 	<toolbox id="navigator-toolbox">
-		<toolbar align="center" id="bpasswdToolbar" toolbarname="BPasswd toolbar" class="chromeclass-toolbar" chromeclass="toolbar" context="toolbar-context-menu" key="bpasswd_key_toggle_toolbar">
-			<label control="bpasswd-password" value="&masterpwd;:"/>
-			<textbox id="bpasswd-password" type="password" label="Password" tabindex="1"/>
-			<label control="bpasswd-salt" value="&salt;:"/>
-			<textbox id="bpasswd-salt" label="Salt" tabindex="2" />
-			<toolbarbutton id="bpasswd-derive-key" label="&derivekey;" tabindex="3" oncommand="bpasswdDeriveKey();"/>
-			<textbox id="bpasswd-dkey" size="30" label="Key"/>
-			<checkbox id="bpasswd-show-pwd" label="&reveal;" tabindex="-1" oncommand="bpasswdReveal();"/>
-		</toolbar>
+		<toolbar id="bpasswd-toolbar" toolbarname="BPasswd Toolbar" customizable="true" mode="text" context="toolbar-context-menu" defaultset="bpasswd-button" insertbefore="PersonalToolbar" />
 	</toolbox>
 
 	<keyset id="mainKeyset">
 		<key id="bpasswd_key_toggle_toolbar" keycode="VK_F9" keytext="F9" command="bpasswd_command_toggle_toolbar"/>
 	</keyset>
-
 	<commandset id="mainCommandSet">
-		<command id="bpasswd_command_toggle_toolbar" oncommand="bpasswdToggleBar();"/>
+		<command id="bpasswd_command_toggle_toolbar" oncommand="bpasswdTogglePane();"/>
 	</commandset>
-</overlay>
 
+
+	<popupset>
+		<panel id="bpasswd-panel" onpopupshown="bpasswdFocus();">
+			<vbox>
+				<label control="bpasswd-password" value="&masterpwd;:"/>
+				<hbox>
+					<textbox id="bpasswd-password" type="password" label="&masterpwd;" tabindex="1"/>
+					<checkbox id="bpasswd-show-pwd" label="&reveal;" tabindex="-1" oncommand="bpasswdReveal();"/>
+				</hbox>
+
+				<label control="bpasswd-salt" value="&salt;:"/>
+				<textbox id="bpasswd-salt" label="&salt;" tabindex="2" />
+
+				<label control="bpasswd-dkey" value="&derivedkey;:" />
+				<textbox id="bpasswd-dkey" size="40" label="&derivedkey;"/>
+
+				<button id="bpasswd-derive-key" label="&derivekey;" tabindex="3" oncommand="bpasswdDeriveKey();"/>
+			</vbox>
+		</panel>
+	</popupset>
+</overlay>
