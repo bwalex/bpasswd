@@ -29,7 +29,7 @@
 
 
 	<popupset>
-		<panel id="bpasswd-panel" onpopupshown="bpasswdFocus();">
+		<panel id="bpasswd-panel" onpopupshown="bpasswdFocus();" onpopuphiding="bpasswdClear();">
 			<vbox>
 				<label control="bpasswd-password" value="&masterpwd;:"/>
 				<hbox>

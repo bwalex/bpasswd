@@ -12,10 +12,15 @@ function bpasswdDeriveKey() {
 }
 
 
-function bpasswdTogglePane() {
+function bpasswdClear() {
   document.getElementById("bpasswd-salt").value = "";
   document.getElementById("bpasswd-password").value = "";
   document.getElementById("bpasswd-dkey").value = "";
+}
+
+
+function bpasswdTogglePane() {
+  bpasswdClear();
   var pane = document.getElementById('bpasswd-panel');
   if (pane.state === "open")
     pane.hidePopup();
