@@ -1,0 +1,7 @@
+#bpasswd-button {
+  list-style-image: url("chrome://bpasswd/skin/key24.png");
+}
+
+toolbar[iconsize="small"] #bpasswd-button {
+  list-style-image: url("chrome://bpasswd/skin/key16.png");
+}
