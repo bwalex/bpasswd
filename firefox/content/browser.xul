@@ -13,13 +13,13 @@
 	<script src="bpasswd-ff.js" />
 	<toolbox id="navigator-toolbox">
 		<toolbar align="center" id="bpasswdToolbar" toolbarname="BPasswd toolbar" class="chromeclass-toolbar" chromeclass="toolbar" context="toolbar-context-menu" key="bpasswd_key_toggle_toolbar">
-			<label control="bpasswd-password" value="Master Password:"/>
+			<label control="bpasswd-password" value="&masterpwd;:"/>
 			<textbox id="bpasswd-password" type="password" label="Password" tabindex="1"/>
-			<label control="bpasswd-salt" value="Salt:"/>
+			<label control="bpasswd-salt" value="&salt;:"/>
 			<textbox id="bpasswd-salt" label="Salt" tabindex="2" />
-			<toolbarbutton id="bpasswd-derive-key" label="Derive Key" tabindex="3" oncommand="bpasswdDeriveKey();"/>
+			<toolbarbutton id="bpasswd-derive-key" label="&derivekey;" tabindex="3" oncommand="bpasswdDeriveKey();"/>
 			<textbox id="bpasswd-dkey" size="30" label="Key"/>
-			<checkbox id="bpasswd-show-pwd" label="Reveal master" tabindex="-1" oncommand="bpasswdReveal();"/>
+			<checkbox id="bpasswd-show-pwd" label="&reveal;" tabindex="-1" oncommand="bpasswdReveal();"/>
 		</toolbar>
 	</toolbox>
 

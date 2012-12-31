@@ -1,1 +1,4 @@
-<!ENTITY runbpasswd "Run BPasswd">
+<!ENTITY derivekey "Derive Key">
+<!ENTITY masterpwd "Master password">
+<!ENTITY salt "Salt">
+<!ENTITY reveal "Reveal master">
