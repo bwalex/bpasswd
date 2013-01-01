@@ -12,19 +12,27 @@
 	<script src="bpasswd.js" />
 	<script src="bpasswd-ff.js" />
 
+
 	<toolbarpalette id="BrowserToolbarPalette">
-		<toolbarbutton id="bpasswd-button" label="BPasswd" tooltiptext="Test tooltip" popup="bpasswd-panel"/>
+		<toolbarbutton
+			id="bpasswd-button"
+			label="BPasswd"
+			tooltiptext="BPasswd"
+			popup="bpasswd-panel"/>
 	</toolbarpalette>
 
-	<toolbox id="navigator-toolbox">
-		<toolbar id="bpasswd-toolbar" toolbarname="BPasswd Toolbar" customizable="true" mode="text" context="toolbar-context-menu" defaultset="bpasswd-button" insertbefore="PersonalToolbar" />
-	</toolbox>
 
 	<keyset id="mainKeyset">
-		<key id="bpasswd_key_toggle_toolbar" keycode="VK_F9" keytext="F9" command="bpasswd_command_toggle_toolbar"/>
+		<key
+			id="bpasswd_key_toggle_toolbar"
+			keycode="VK_F9"
+			keytext="F9"
+			command="bpasswd_command_toggle_toolbar"/>
 	</keyset>
 	<commandset id="mainCommandSet">
-		<command id="bpasswd_command_toggle_toolbar" oncommand="bpasswdTogglePane();"/>
+		<command
+			id="bpasswd_command_toggle_toolbar"
+			oncommand="bpasswdTogglePane();"/>
 	</commandset>
 
 

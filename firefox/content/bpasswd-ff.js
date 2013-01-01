@@ -36,5 +36,57 @@ function bpasswdReveal() {
 
 
 function bpasswdFocus() {
-	document.getElementById("bpasswd-password").focus();
+  document.getElementById("bpasswd-password").focus();
+}
+
+
+
+window.addEventListener("load", function() {
+  try {
+    var first;
+    try {
+      first = Services.prefs.getBoolPref("extensions.bpasswd.firstrun");
+    } catch(e) {
+      Services.prefs.setBoolPref("extensions.bpasswd.firstrun", true);
+      first = true;
+    }
+
+    console.log("bpasswd first: " + (first ? "first" : "not"));
+    if (first) {
+      Services.prefs.setBoolPref("extensions.bpasswd.firstrun", false);
+      installButton('nav-bar', 'bpasswd-button');
+    }
+  } catch(e) {
+  }
+}, true);
+
+
+
+/**
+ * Installs the toolbar button with the given ID into the given
+ * toolbar, if it is not already present in the document.
+ *
+ * @param {string} toolbarId The ID of the toolbar to install to.
+ * @param {string} id The ID of the button to install.
+ * @param {string} afterId The ID of the element to insert after. @optional
+ */
+function installButton(toolbarId, id, afterId) {
+    if (!document.getElementById(id)) {
+        var toolbar = document.getElementById(toolbarId);
+
+        // If no afterId is given, then append the item to the toolbar
+        var before = null;
+        if (afterId) {
+            var elem = document.getElementById(afterId);
+            if (elem && elem.parentNode == toolbar)
+                before = elem.nextElementSibling;
+        }
+
+        toolbar.insertItem(id, before);
+        toolbar.setAttribute("currentset", toolbar.currentSet);
+        document.persist(toolbar.id, "currentset");
+
+        if (toolbarId == "addon-bar")
+            toolbar.collapsed = false;
+    }
 }
