@@ -1,4 +1,6 @@
-function bpasswdDeriveKey() {
+var bpasswd = {};
+
+bpasswd.deriveKey = function() {
   var cost = 6;
   var salt = document.getElementById("bpasswd-salt").value;
   var pass = document.getElementById("bpasswd-password").value;
@@ -12,15 +14,15 @@ function bpasswdDeriveKey() {
 }
 
 
-function bpasswdClear() {
+bpasswd.clear = function() {
   document.getElementById("bpasswd-salt").value = "";
   document.getElementById("bpasswd-password").value = "";
   document.getElementById("bpasswd-dkey").value = "";
 }
 
 
-function bpasswdTogglePane() {
-  bpasswdClear();
+bpasswd.togglePane = function() {
+  bpasswd.clear();
   var pane = document.getElementById('bpasswd-panel');
   if (pane.state === "open")
     pane.hidePopup();
@@ -29,13 +31,13 @@ function bpasswdTogglePane() {
 }
 
 
-function bpasswdReveal() {
+bpasswd.reveal = function() {
   var type = document.getElementById("bpasswd-show-pwd").checked ? null : "password";
   document.getElementById("bpasswd-password").type = type;
 }
 
 
-function bpasswdFocus() {
+bpasswd.focus = function() {
   document.getElementById("bpasswd-password").focus();
 }
 
@@ -51,10 +53,9 @@ window.addEventListener("load", function() {
       first = true;
     }
 
-    console.log("bpasswd first: " + (first ? "first" : "not"));
     if (first) {
       Services.prefs.setBoolPref("extensions.bpasswd.firstrun", false);
-      installButton('nav-bar', 'bpasswd-button');
+      bpasswdInstallButton('nav-bar', 'bpasswd-button');
     }
   } catch(e) {
   }
@@ -70,7 +71,7 @@ window.addEventListener("load", function() {
  * @param {string} id The ID of the button to install.
  * @param {string} afterId The ID of the element to insert after. @optional
  */
-function installButton(toolbarId, id, afterId) {
+function bpasswdInstallButton(toolbarId, id, afterId) {
     if (!document.getElementById(id)) {
         var toolbar = document.getElementById(toolbarId);
 

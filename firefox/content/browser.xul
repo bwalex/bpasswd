@@ -32,17 +32,17 @@
 	<commandset id="mainCommandSet">
 		<command
 			id="bpasswd_command_toggle_toolbar"
-			oncommand="bpasswdTogglePane();"/>
+			oncommand="bpasswd.togglePane();"/>
 	</commandset>
 
 
 	<popupset>
-		<panel id="bpasswd-panel" onpopupshown="bpasswdFocus();" onpopuphiding="bpasswdClear();">
+		<panel id="bpasswd-panel" onpopupshown="bpasswd.focus();" onpopuphiding="bpasswd.clear();">
 			<vbox>
 				<label control="bpasswd-password" value="&masterpwd;:"/>
 				<hbox>
 					<textbox id="bpasswd-password" type="password" label="&masterpwd;" tabindex="1"/>
-					<checkbox id="bpasswd-show-pwd" label="&reveal;" tabindex="-1" oncommand="bpasswdReveal();"/>
+					<checkbox id="bpasswd-show-pwd" label="&reveal;" tabindex="-1" oncommand="bpasswd.reveal();"/>
 				</hbox>
 
 				<label control="bpasswd-salt" value="&salt;:"/>
@@ -51,7 +51,7 @@
 				<label control="bpasswd-dkey" value="&derivedkey;:" />
 				<textbox id="bpasswd-dkey" size="40" label="&derivedkey;"/>
 
-				<button id="bpasswd-derive-key" label="&derivekey;" tabindex="3" oncommand="bpasswdDeriveKey();"/>
+				<button id="bpasswd-derive-key" label="&derivekey;" tabindex="3" oncommand="bpasswd.deriveKey();"/>
 			</vbox>
 		</panel>
 	</popupset>
