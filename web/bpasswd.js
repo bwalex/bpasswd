@@ -1,7 +1,9 @@
 BPasswd = {
-  generate: function(salt, password, cost) {
+  generate: function(salt, password, cost, gen_method) {
     if (typeof(cost) === "undefined")
       cost = 6;
+    if (typeof(gen_method) === "undefined")
+      gen_method = "base64";
 
     var h = new HMAC(Sha256);
     var b = new BCrypt();
@@ -13,6 +15,6 @@ BPasswd = {
     s = h.encrypt(s);
 
     var c = b.bcrypt(cost, s, k);
-    return EncDec.base64.encode(c);
+    return EncDec[gen_method].encode(c);
   }
 };

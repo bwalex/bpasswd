@@ -165,3 +165,84 @@ EncDec.base64 = {
 for (var i = 0; i < 64; i++)
   EncDec.base64.revTable_[EncDec.base64.fwdTable_[i]] = i;
 
+
+EncDec.conservative = {
+  fwdTable_: [ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
+  "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+  "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o",
+  "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3",
+  "4", "5", "6", "7", "8", "9", "3", "6" ],
+
+  encode: function(bytes) {
+    var rem = 3-bytes.length%3;
+    var str = "";
+
+    // Pad input
+    if (rem != 3) {
+      for (var i = 0; i < rem; i++)
+        bytes.push(0);
+    }
+
+    var chars = bytes.length/3;
+
+    for (var i = 0; i < chars; i++) {
+      var octets = 0;
+      octets |= ((bytes[i*3+0] & 0xFF) << 16);
+      octets |= ((bytes[i*3+1] & 0xFF) <<  8);
+      octets |= ((bytes[i*3+2] & 0xFF)      );
+
+      str += EncDec.conservative.fwdTable_[(octets >> 18) & 0x3F];
+      str += EncDec.conservative.fwdTable_[(octets >> 12) & 0x3F];
+      str += EncDec.conservative.fwdTable_[(octets >>  6) & 0x3F];
+      str += EncDec.conservative.fwdTable_[(octets      ) & 0x3F];
+    }
+
+    // Pad output
+    if (rem != 3) {
+      str = str.substr(0,str.length-rem);
+      for (var i = 0; i < rem; i++)
+        str += "=";
+    }
+
+    return str;
+  }
+}
+
+
+// Based on reference implementation for rfc.zeromq.org/spec:32/Z85
+EncDec.z85 = {
+  fwdTable_: [
+    "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+    "a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
+    "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
+    "u", "v", "w", "x", "y", "z", "A", "B", "C", "D",
+    "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
+    "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X",
+    "Y", "Z", ".", "-", ":", "+", "=", "^", "!", "/",
+    "*", "?", "&", "<", ">", "(", ")", "[", "]", "{",
+    "}", "@", "%", "$", "#"
+  ],
+
+  encode: function(bytes) {
+    var size = bytes.length;
+    var str = "";
+    var byte_nbr = 0;
+    var char_nbr = 0;
+    var value = 0;
+
+    while (byte_nbr < size) {
+      value = ((value << 8) >>> 0) + bytes[byte_nbr++];
+      if (byte_nbr % 4 == 0) {
+        // Output value in base 85
+        var divisor = 52200625;//85 * 85 * 85 * 85;
+        while (divisor > 0) {
+          var idx = ((value/divisor) >>> 0) % 85;
+          str += EncDec.z85.fwdTable_[idx];
+          divisor = (divisor/85) >>> 0;
+        }
+      }
+    }
+
+    return str;
+  }
+}
