@@ -1,0 +1,49 @@
+button {
+    height: 2em;
+}
+
+button#bpasswd-derive-key {
+    width: 10em;
+}
+
+body {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    overflow: hidden;
+    width: 450px;
+    font-size: 90%;
+}
+
+div.label-row {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+div.input-row {
+    margin-top: 10px;
+    vertical-align: middle;
+}
+
+input#bpasswd-dkey {
+    width: 400px;
+}
+
+label span {
+  display: inline-block;
+  width  : 160px;
+  text-align: right;
+}
+
+#found_salt_config {
+    font-size: 80%;
+    color: green;
+    margin-left: 10px;
+}
+
+#saved_salt_config {
+    font-size: 80%;
+    color: green;
+    margin-left: 10px;
+}
+

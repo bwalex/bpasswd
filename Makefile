@@ -4,14 +4,14 @@ RM= rm -f
 ZIP= zip
 
 populate-chrome:
-	${CP} web/bcrypt.js     chrome/
-	${CP} web/blowfish.js   chrome/
-	${CP} web/bpasswd.js    chrome/
-	${CP} web/encdec.js     chrome/
-	${CP} web/helper.js     chrome/
-	${CP} web/hmac.js       chrome/
-	${CP} web/sha1.js       chrome/
-	${CP} web/sha256.js     chrome/
+	${CP} web/bcrypt.js     chrome/bpasswd/
+	${CP} web/blowfish.js   chrome/bpasswd/
+	${CP} web/bpasswd.js    chrome/bpasswd/
+	${CP} web/encdec.js     chrome/bpasswd/
+	${CP} web/helper.js     chrome/bpasswd/
+	${CP} web/hmac.js       chrome/bpasswd/
+	${CP} web/sha1.js       chrome/bpasswd/
+	${CP} web/sha256.js     chrome/bpasswd/
 
 populate-firefox:
 	${CP} web/bcrypt.js     firefox/content/
@@ -24,14 +24,7 @@ populate-firefox:
 	${CP} web/sha256.js     firefox/content/
 
 clean-chrome:
-	${RM} chrome/bcrypt.js
-	${RM} chrome/blowfish.js
-	${RM} chrome/bpasswd.js
-	${RM} chrome/encdec.js
-	${RM} chrome/helper.js
-	${RM} chrome/hmac.js
-	${RM} chrome/sha1.js
-	${RM} chrome/sha256.js
+	${RM} chrome/bpasswd/*.js
 
 clean-firefox:
 	${RM} firefox/content/bcrypt.js

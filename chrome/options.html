@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>BPasswd options</title>
+  <link rel="stylesheet" href="vendor/number-polyfill.css" type="text/css"/>
+  <link rel="stylesheet" href="options.css" type="text/css"/>
+</head>
+<body>
+  <h2>Global options</h2>
+  <section id="global-opts">
+  </section>
+
+  <h2>Per-salt options</h2>
+  <section id="opts">
+  </section>
+</body>
+
+<script type="text/template" id="opt-list-view-tmpl">
+    <input id="new-salt" type="text" placeholder="Add new salt option..."></input>
+    <ul id="opts-list"></ul>
+    <p>
+       <button id="optlist_save_changes" disabled="disabled">Save changes</button>
+    </p>
+</script>
+
+<script type="text/template" id="opt-simple-view-tmpl">
+    <%= name %>
+</script>
+
+<script type="text/template" id="opt-expanded-view-tmpl">
+    <fieldset>
+        <p>
+            <label for="cost"><span>Bcrypt cost factor:</span></label>
+            <input type="number" id="cost" min="1" max="100" step="1" value="<%= cost %>"/>
+        </p>
+        <p>
+            <label for="max_len"><span>Maximum password length:</span></label>
+            <input type="number" id="max_len" min="4" max="64" step="1" value="<%= max_len %>"/>
+        </p>
+        <p>
+            <label for="gen_method"><span>Mapping method:</span></label>
+            <select id="gen_method">
+                <option value="base64"       <% print((gen_method === "base64")       ? "selected=\"selected\"" : "")%> >base64</option>
+                <option value="conservative" <% print((gen_method === "conservative") ? "selected=\"selected\"" : "")%> >conservative</option>
+                <option value="z85"          <% print((gen_method === "z85")          ? "selected=\"selected\"" : "")%> >z85</option>
+            </select>
+        </p>
+        <p>
+            <label for="delete_opt_btn"><span>&nbsp;</span></label>
+            <button id="delete_opt_btn">Delete this entry</button>
+        </p>
+    </fieldset>
+</script>
+
+<script type="text/template" id="global-settings-tmpl">
+    <fieldset>
+        <p style="display: none;">
+            <label for="hotkey"><span>Hotkey:</span></label>
+            <input type="text" id="hotkey" value="<%= hotkey %>"/>
+        </p>
+        <p>
+            <label for="global_cost"><span>Bcrypt cost factor:</span></label>
+            <input type="number" id="global_cost" min="1" max="100" step="1" value="<%= cost %>"/>
+        </p>
+        <p>
+            <label for="global_max_len"><span>Maximum password length:</span></label>
+            <input type="number" id="global_max_len" min="4" max="64" step="1" value="<%= max_len %>"/>
+        </p>
+        <p>
+            <label for="global_gen_method"><span>Default mapping method:</span></label>
+            <select id="global_gen_method">
+                <option value="base64"       <% print((gen_method === "base64")       ? "selected=\"selected\"" : "")%> >base64</option>
+                <option value="conservative" <% print((gen_method === "conservative") ? "selected=\"selected\"" : "")%> >conservative</option>
+                <option value="z85"          <% print((gen_method === "z85")          ? "selected=\"selected\"" : "")%> >z85</option>
+            </select>
+        </p>
+        <p>
+            <button id="global_save_changes" disabled="disabled">Save changes</button>
+        </p>
+    </fieldset>
+</script>
+  <script src="vendor/jquery-2.0.3.min.js"></script>
+  <script src="vendor/lodash.min.js"></script>
+  <script src="vendor/backbone-min.js"></script>
+  <script src="global_controller.js"></script>
+  <script src="options.js"></script>
+</html>

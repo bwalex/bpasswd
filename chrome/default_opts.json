@@ -1,0 +1,15 @@
+{
+    "global_options" : {
+        "gen_method" : "base64",
+        "max_len"    : 32,
+        "cost"       : 6,
+        "hotkey"     : "f8"
+    },
+    "salt_options" : {
+        "paypal" : {
+            "gen_method" : "z85",
+            "max_len"    : 20,
+            "cost"       : 6
+        }
+    }
+}

@@ -1,13 +1,32 @@
 {
   "name": "BPasswd",
-  "version": "1.3",
+  "version": "2.0",
   "manifest_version": 2,
   "description": "A strong password generator using bcrypt for key derivation",
   "incognito": "split",
   "browser_action": {
     "default_icon": "icon.png",
-    "default_popup": "bpasswd_chrome.html"
+    "default_popup": "panel.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+B"
+      }
+    }
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "vendor/lodash.min.js",
+      "vendor/jquery-2.0.3.min.js",
+      "event_page.js"
+    ],
+    "persistent": false
   },
   "permissions": [
-  ]
+    "tabs",
+    "storage"
+  ],
+  "options_page": "options.html"
 }

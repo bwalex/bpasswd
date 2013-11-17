@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>BPasswd - a strong password generator</title>
+  <link rel="stylesheet" href="vendor/number-polyfill.css" type="text/css"/>
+  <link rel="stylesheet" href="panel.css" type="text/css"/>
+</head>
+<body>
+  <div class="row label-row">
+    <label for="bpasswd-password">Master password: </label>
+  </div>
+  <div class="row input-row">
+    <input id="bpasswd-password" type="password" tabindex="1"/>
+    <input id="bpasswd-show-pwd" type="checkbox" tabindex="-1" />
+    <label for="bpasswd-show-pwd">Reveal</label>
+  </div>
+  <div class="row label-row">
+    <label for="bpasswd-salt">Salt: </label>
+  </div>
+  <div class="row input-row">
+    <input id="bpasswd-salt" type="text" tabindex="2"/><span id="found_salt_config">Found salt config!</span>
+  </div>
+  <div class="row label-row">
+    <label for="bpasswd-dkey">Derived Key: </label>
+  </div>
+  <div class="row input-row">
+    <input id="bpasswd-dkey" type="text" readonly tabindex="-1"/>
+  </div>
+  <div class="row input-row">
+    <button id="bpasswd-derive-key" tabindex="3">Derive Key</button>
+    <button id="bpasswd-more-options" tabindex="4">More options...</button>
+    <button id="bpasswd-show-options" tabindex="-1">Settings</button>
+  </div>
+  <div id="more-options">
+        <p>
+            <label for="more_cost"><span>Bcrypt cost factor:</span></label>
+            <input type="number" id="more_cost" min="1" max="100" step="1" value=""/>
+        </p>
+        <p>
+            <label for="more_max_len"><span>Max password length:</span></label>
+            <input type="number" id="more_max_len" min="4" max="64" step="1" value=""/>
+        </p>
+        <p>
+            <label for="more_gen_method"><span>Mapping method:</span></label>
+            <select id="more_gen_method">
+                <option value="base64">base64</option>
+                <option value="conservative">conservative</option>
+                <option value="z85">z85</option>
+            </select>
+        </p>
+        <p>
+            <button id="bpasswd-save-options">Save salt options</button><span id="saved_salt_config">Saved config for salt: <span id="saved_salt_salt"></span></span>
+        </p>
+  </div>
+  <script src="vendor/jquery-2.0.3.min.js"></script>
+  <script src="vendor/sld.js"></script>
+  <script src="vendor/uri.js"></script>
+  <script src="bpasswd/encdec.js"></script>
+  <script src="bpasswd/helper.js"></script>
+  <script src="bpasswd/sha256.js"></script>
+  <script src="bpasswd/sha1.js"></script>
+  <script src="bpasswd/hmac.js"></script>
+  <script src="bpasswd/blowfish.js"></script>
+  <script src="bpasswd/bcrypt.js"></script>
+  <script src="bpasswd/bpasswd.js"></script>
+  <script src="panel.js"></script>
+</body>
+</html>
