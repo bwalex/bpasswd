@@ -27,6 +27,28 @@
   </div>
   <button onclick="bpasswdDeriveKey();">Derive Key</button>
   <button onclick="bpasswdClear();">Clear</button>
+  <div>
+    <span style="float: left; width: 180px;">
+      <label for="bpasswd-max-length">Max length: </label>
+    </span>
+    <input id="bpasswd-max-length" type="number" min="4" max="32" value="32"/>
+  </div>
+  <div>
+    <span style="float: left; width: 180px;">
+      <label for="bpasswd-cost">Cost: </label>
+    </span>
+    <input id="bpasswd-cost" type="number" min="1" max="100" value="6"/>
+  </div>
+  <div>
+    <span style="float: left; width: 180px;">
+      <label for="bpasswd-gen-method">Generation method: </label>
+    </span>
+    <select id="bpasswd-gen-method">
+      <option value="base64">base64</option>
+      <option value="conservative">conservative</option>
+      <option value="z85">z85</option>
+    </select>
+  </div>
   <script src="qunit-1.10.0.js"></script>
   <script src="encdec.js"></script>
   <script src="helper.js"></script>
@@ -58,11 +80,13 @@
     }
 
     function bpasswdDeriveKey() {
-      var cost = 6;
+      var cost = document.getElementById("bpasswd-cost").value;
       var salt = document.getElementById("bpasswd-salt").value;
       var pass = document.getElementById("bpasswd-password").value;
-      var dkey = BPasswd.generate(salt, pass, cost);
-      document.getElementById("bpasswd-dkey").value = dkey;
+      var maxlen = document.getElementById("bpasswd-max-length").value;
+      var genmethod = document.getElementById("bpasswd-gen-method").value;
+      var dkey = BPasswd.generate(salt, pass, cost, genmethod);
+      document.getElementById("bpasswd-dkey").value = dkey.substring(0, maxlen);
     }
   </script>
 </body>
