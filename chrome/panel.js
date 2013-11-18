@@ -116,6 +116,6 @@ chrome.storage.sync.get(null, function(items) {
 
 
 $(function() {
-    //$('input[type="number"]').inputNumber();
+    $('input[type="number"]').inputNumber();
     $('#more-options').hide();
 });
