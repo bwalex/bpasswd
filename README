@@ -1,6 +1,6 @@
 A strong password generator using bcrypt for key derivation in a convenient toolbar.
 
-Every few weeks we get to hear about some database full of passwords being stolen: ubuntu forums (1.8 million stolen passwords), macrumours (860,000 stolen passwords), adobe (150 million stolen passwords), linkedin (6.5 million stolen passwords), last.fm (2.5 million stolen passwords), eharmony (1.5 million stolen passwords), etc, etc.
+Every few weeks we get to hear about some database full of passwords being stolen: ubuntu forums (1.8 million stolen passwords), macrumours (860,000 stolen passwords), adobe (150 million stolen passwords), linkedin (6.5 million stolen passwords), last.fm (2.5 million stolen passwords), eharmony (1.5 million stolen passwords), Cupid Media (42 million stolen *plaintext* passwords) etc, etc.
 
 Sadly, most of these passwords are poorly protected - often no salt is used at all. When a salt is used, half of the times the passwords are still hashed using a fast hashing algorithm such as md5. And then there's Adobe - encrypting passwords (reversibly) using 3DES. All it takes is for the hacker(s) to also have stolen the key to be able to immediately decrypt a wealth of passwords.
 
