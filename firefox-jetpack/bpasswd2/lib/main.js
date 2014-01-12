@@ -24,13 +24,6 @@ exports.main = function(options) {
     var pane = require("sdk/panel").Panel({
         contentURL: data.url("panel.html"),
         contentScriptFile: [
-            data.url("bpasswd/enc_dec.js"),
-            data.url("bpasswd/crypto_helper.js"),
-            data.url("bpasswd/sha256.js"),
-            data.url("bpasswd/sha1.js"),
-            data.url("bpasswd/hmac.js"),
-            data.url("bpasswd/blowfish.js"),
-            data.url("bpasswd/bcrypt.js"),
             data.url("bpasswd/bpasswd.js"),
             data.url("vendor/jquery-2.0.3.min.js"),
             data.url("vendor/number-polyfill.js"),
