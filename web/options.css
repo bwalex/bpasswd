@@ -1,0 +1,62 @@
+body {
+    font-family: Verdana;
+    font-size: 95%;
+    color: #666;
+}
+
+#opts ul {
+    width: 200px;
+    list-style-type: none;
+    padding-left: 0px;
+    background-color: rgb(239, 239, 239);
+}
+
+#opts li {
+    padding: 5px 5px 5px 15px;
+    border-right: 1px solid #666;
+    color: rgb(102, 102, 102);
+}
+
+#opts li:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#opts li.selected {
+    background-color: white;
+    border-right: medium none;
+    border-top: 1px solid #666;
+    border-bottom: 1px solid #666;
+    font-weight: bold;
+}
+
+input {
+    border: 1px solid #666;
+    font-size: 90%;
+    padding: 3px;
+}
+
+#new-salt {
+    width: 194px;
+}
+
+
+label span {
+  display: inline-block;
+  width  : 220px;
+  text-align: right;
+}
+
+label span.smaller-label {
+    width: 120px;
+}
+
+fieldset {
+    border: medium none;
+    padding-left: 0px;
+}
+
+h2 {
+    border-bottom: 1px solid #666;
+    padding-bottom: 5px;
+}
