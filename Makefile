@@ -40,8 +40,8 @@ package-firefox: clean-firefox populate-firefox
 
 package-firefox-jetpack: clean-firefox-jetpack populate-firefox-jetpack
 	${RM} dist/bpasswd-jetpack.xpi
-	cfx --package-path=firefox-jetpack/packages \
-		--pkgdir=firefox-jetpack/bpasswd \
+	cfx xpi --package-path=firefox-jetpack/packages \
+		--pkgdir=firefox-jetpack/bpasswd2 \
 		--output-file=dist/bpasswd-jetpack.xpi
 
 
