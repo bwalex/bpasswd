@@ -24,8 +24,8 @@ exports.main = function(options) {
     var pane = require("sdk/panel").Panel({
         contentURL: data.url("panel.html"),
         contentScriptFile: [
-            data.url("bpasswd/encdec.js"),
-            data.url("bpasswd/helper.js"),
+            data.url("bpasswd/enc_dec.js"),
+            data.url("bpasswd/crypto_helper.js"),
             data.url("bpasswd/sha256.js"),
             data.url("bpasswd/sha1.js"),
             data.url("bpasswd/hmac.js"),
