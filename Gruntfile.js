@@ -110,8 +110,38 @@ module.exports = function(grunt) {
   });
 
 
+  grunt.registerTask('webpack', 'Compile the web pack.', function() {
+    var done = this.async(),
+        archive = archiver('zip'),
+        ostream = fs.createWriteStream('dist/bpasswd-web.zip');
+
+    archive.on('error', function(err) {
+      grunt.log.error(err);
+      grunt.fail.warn('Archiving failed.');
+    });
+
+    ostream.on('close', function() {
+      done();
+    });
+
+    archive.pipe(ostream);
+
+    archive.append(fs.createReadStream('dist/bpasswd.min.js'), { name: 'bpasswd-web/bpasswd.min.js' });
+    archive.append(fs.createReadStream('common/global_controller.js'), { name: 'bpasswd-web/global_controller.js' });
+    archive.bulk([
+      { expand: true, src: ['bpasswd-web/**/*'] }
+    ]);
+
+    archive.finalize(function(err, bytes) {
+      if (err)
+        throw(err);
+      grunt.log.writeln('File "dist/bpasswd-web.zip" created.');
+      console.log('Final size: ' + pretty(bytes));
+    });
+  });
+
   grunt.registerTask('bundle', ['browserify', 'uglify']);
-  grunt.registerTask('compile', ['bundle', 'chrome-ext', 'firefox-ext']);
+  grunt.registerTask('compile', ['bundle', 'chrome-ext', 'firefox-ext', 'webpack']);
   grunt.registerTask('test', ['qunit']);
   grunt.registerTask('default', ['test', 'compile']);
 };
