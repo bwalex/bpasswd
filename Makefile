@@ -4,24 +4,13 @@ RM= rm -f
 ZIP= zip
 
 populate-chrome:
-	${CP} web/bcrypt.js     chrome/bpasswd/
-	${CP} web/blowfish.js   chrome/bpasswd/
-	${CP} web/bpasswd.js    chrome/bpasswd/
-	${CP} web/encdec.js     chrome/bpasswd/
-	${CP} web/helper.js     chrome/bpasswd/
-	${CP} web/hmac.js       chrome/bpasswd/
-	${CP} web/sha1.js       chrome/bpasswd/
-	${CP} web/sha256.js     chrome/bpasswd/
+	${CP} common/bpasswd/*	chrome/bpasswd/
 
 populate-firefox:
-	${CP} web/bcrypt.js     firefox/content/
-	${CP} web/blowfish.js   firefox/content/
-	${CP} web/bpasswd.js    firefox/content/
-	${CP} web/encdec.js     firefox/content/
-	${CP} web/helper.js     firefox/content/
-	${CP} web/hmac.js       firefox/content/
-	${CP} web/sha1.js       firefox/content/
-	${CP} web/sha256.js     firefox/content/
+	${CP} common/bpasswd/*	firefox/content/
+
+populate-firefox-jetpack:
+	${CP} common/bpasswd/*	firefox-jetpack/bpasswd2/data/bpasswd/
 
 clean-chrome:
 	${RM} chrome/bpasswd/*.js
@@ -36,17 +25,26 @@ clean-firefox:
 	${RM} firefox/content/sha1.js
 	${RM} firefox/content/sha256.js
 
+clean-firefox-jetpack:
+	${RM} firefox-jetpack/bpasswd2/data/bpasswd/*.js
+
 
 package-chrome: clean-chrome populate-chrome
-	${RM} bpasswd-chrome.zip
-	cd chrome; ${ZIP} -r ../bpasswd-chrome.zip *
+	${RM} dist/bpasswd-chrome.zip
+	cd chrome; ${ZIP} -r ../dist/bpasswd-chrome.zip *
 
 package-firefox: clean-firefox populate-firefox
-	${RM} bpasswd-firefox.xpi
+	${RM} dist/bpasswd-firefox.xpi
 	cd firefox; ${ZIP} -r ../bpasswd-firefox.zip *
-	${MV} bpasswd-firefox.zip bpasswd-firefox.xpi
+	${MV} bpasswd-firefox.zip dist/bpasswd-firefox.xpi
+
+package-firefox-jetpack: clean-firefox-jetpack populate-firefox-jetpack
+	${RM} dist/bpasswd-jetpack.xpi
+	cfx --package-path=firefox-jetpack/packages \
+		--pkgdir=firefox-jetpack/bpasswd \
+		--output-file=dist/bpasswd-jetpack.xpi
 
 
-package: package-chrome package-firefox
-clean: clean-chrome clean-firefox
-populate: populate-firefox populate-chrome
+package: package-chrome package-firefox-jetpack
+clean: clean-chrome clean-firefox-jetpack
+populate: populate-chrome populate-firefox-jetpack

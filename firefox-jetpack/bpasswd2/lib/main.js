@@ -1,30 +1,27 @@
 // This is an active module of the bpasswd Add-on
 exports.main = function(options) {
 
-    var data = require("self").data;
-    var _ = require("lodash");
-
-
-
-    var tabs = require("tabs");
-    var clipboard = require("clipboard");
+    var data = require("sdk/self").data;
+    var tabs = require("sdk/tabs");
+    var clipboard = require("sdk/clipboard");
     var prefs = require("sdk/preferences/service");
-    var uri = require("./uri");
-    var { Hotkey } = require("hotkeys");
+    var { Hotkey } = require("sdk/hotkeys");
+    var _ = require("lodash");
+    var { URI } = require("./uri");
 
-    const { id } = require("self");
+    const { id } = require("sdk/self");
     const PREF_PATH = "extensions." + id + ".";
 
     var _pref = function(p) { return PREF_PATH + p };
 
     var _domain = function(url) {
-        var u = uri.URI(url);
+        var u = URI(url);
         var domain = u.domain();
         var tld = u.tld();
         return domain.substring(0, domain.length-tld.length-1);
     }
 
-    var pane = require("panel").Panel({
+    var pane = require("sdk/panel").Panel({
         contentURL: data.url("panel.html"),
         contentScriptFile: [
             data.url("bpasswd/encdec.js"),
@@ -41,26 +38,22 @@ exports.main = function(options) {
         ]
     });
 
-    var widget = require("widget").Widget({
+    var widget = require("sdk/widget").Widget({
         label: "BPasswd2",
         id: "bpasswd2-widget",
         contentURL: data.url("key24.png"),
         panel: pane
     });
 
-    var tbb = require("toolbarbutton").ToolbarButton({
-        id: "bpasswd2-button",
+    var tbb = require("toolbarwidget").ToolbarWidget({
+        toolbarID: "nav-bar",
         label: "BPasswd2",
-        image: data.url("key24.png"),
+        id: "bpasswd2-button",
+        contentURL: data.url("key24.png"),
         panel: pane
     });
 
     if (options.loadReason == "install") {
-        tbb.moveTo({
-            toolbarID: "nav-bar",
-            forceMove: false // only move from palette
-        });
-
         var defs = data.load("default_opts.json");
 
         _.each(JSON.parse(defs), function(v,k) {
@@ -97,7 +90,7 @@ exports.main = function(options) {
         pane.port.emit("show", {
             currentUrl: _domain(tabs.activeTab.url),
             "global_options" : global_prefs,
-            "salt_options"   : site_prefs   
+            "salt_options"   : site_prefs
         });
     });
 

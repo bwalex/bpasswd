@@ -1,0 +1,14 @@
+{
+  "name": "bpasswd2",
+  "title": "bpasswd2",
+  "id": "jid0-z9mqGoLLFCgUUnGyP5bb97JbxAs",
+  "description": "A strong password generator using bcrypt for key derivation in a convenient toolbar.",
+  "author": "Alex Hornung",
+  "license": "MPL 2.0",
+  "version": "0.2",
+  "contributors": [],
+  "url": "",
+  "dependencies": [
+    "toolbarwidget"
+  ]
+}
