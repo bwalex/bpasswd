@@ -1,0 +1,23 @@
+{
+  "name": "bpasswd",
+  "version": "0.1.0",
+  "description": "",
+  "author": {
+    "name": "Alex Hornung",
+    "email": "alex@alexhornung.com",
+    "url": "http://www.alexhornung.com"
+  },
+  "license": "MPL 2.0",
+  "dependencies": {
+    "grunt": "~0.4",
+    "grunt-browserify": "~> 1.3",
+    "grunt-contrib-uglify": "~> 0.2.6",
+    "grunt-contrib-compress": "~> 0.5.3",
+    "grunt-contrib-copy": "~> 0.5.0",
+    "deamdify": "~> 0.1.1",
+    "uglify-js": "~> 2.4.8",
+    "wrench": "~> 1.5.4",
+    "prettysize": "~> 0.0.3",
+    "archiver": "~> 0.5.0"
+  }
+}
