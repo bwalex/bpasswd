@@ -266,8 +266,6 @@ $(function() {
     })
 
     chrome.storage.sync.get(null, function(items) {
-        console.log("hiho");
-        console.dir(items);
         var props = [];
         _.each(items.salt_options, function(val, key) {
             props.push(_.extend({"name" : key}, val));

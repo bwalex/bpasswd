@@ -23,7 +23,6 @@ var updateOpts = function(onlyGlobal) {
     $('#more_cost').val(cost);
     $('#more_gen_method').val(gen_method);
 
-    console.log("called me; " + found_salt ? "yep" : "nope");
     if (found_salt)
         $('#found_salt_config').show();
     else
@@ -45,8 +44,6 @@ $('#bpasswd-derive-key').click(function() {
     var cost = $('#more_cost').val();
     var max_len = $('#more_max_len').val();
     var gen_method = $('#more_gen_method').val();
-
-    console.log("max_len, gen_method: " + max_len + ", " + gen_method);
 
     var dkey = BPasswd.generate(salt, pass, cost, gen_method).substring(0, max_len);
     $('#bpasswd-dkey').val(dkey);
@@ -97,8 +94,6 @@ $('#bpasswd-show-pwd').change(function() {
 });*/
 
 chrome.storage.sync.get(null, function(items) {
-    console.log("found it...");
-    console.dir(items);
     prefs = items;
     $('#bpasswd-password').focus();
     $('#saved_salt_config').hide();

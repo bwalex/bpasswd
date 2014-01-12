@@ -4,7 +4,6 @@ chrome.runtime.onInstalled.addListener(function(details) {
             _.each(defs, function(v,k) {
                 var save = {};
                 save[k] = v;
-                console.dir(save);
                 chrome.storage.sync.set(save);
 	    });
         });

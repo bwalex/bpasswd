@@ -50,8 +50,6 @@ $('#bpasswd-derive-key').click(function() {
     var max_len = $('#more_max_len').val();
     var gen_method = $('#more_gen_method').val();
 
-    console.log("max_len, gen_method: " + max_len + ", " + gen_method);
-
     var dkey = BPasswd.generate(salt, pass, cost, gen_method).substring(0, max_len);
     $('#bpasswd-dkey').val(dkey);
     $('#bpasswd-dkey').focus();
