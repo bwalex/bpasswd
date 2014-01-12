@@ -9,7 +9,7 @@
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like enviroments that support module.exports,
         // like Node.
-        module.exports = factory(require('encdec'), require('crypto_helper'));
+        module.exports = factory(require('./enc_dec'), require('./crypto_helper'));
     } else {
         // Browser globals (root is window)
         root.Blowfish = factory(root.EncDec, root.CryptoHelper);

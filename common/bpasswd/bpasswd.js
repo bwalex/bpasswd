@@ -6,10 +6,10 @@
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like enviroments that support module.exports,
         // like Node.
-        module.exports = factory(require('bcrypt'),
-                                 require('hmac'),
-                                 require('enc_dec'),
-                                 require('sha256'));
+        module.exports = factory(require('./bcrypt'),
+                                 require('./hmac'),
+                                 require('./enc_dec'),
+                                 require('./sha256'));
     } else {
         // Browser globals (root is window)
         root.BPasswd = factory(root.BCrypt,

@@ -12,7 +12,7 @@
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like enviroments that support module.exports,
         // like Node.
-        module.exports = factory(require('enc_dec'));
+        module.exports = factory(require('./enc_dec'));
     } else {
         // Browser globals (root is window)
         root.Sha1 = factory(root.EncDec);
