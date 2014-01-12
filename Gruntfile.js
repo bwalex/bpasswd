@@ -73,6 +73,7 @@ module.exports = function(grunt) {
     archive.finalize(function(err, bytes) {
       if (err)
         throw(err);
+      grunt.log.writeln('File "dist/bpasswd-chrome.zip" created.');
       console.log('Final size: ' + pretty(bytes));
     });
   });
@@ -100,6 +101,7 @@ module.exports = function(grunt) {
         throw(err);
 
       stats = fs.statSync('dist/bpasswd-jetpack.xpi');
+      grunt.log.writeln('File "dist/bpasswd-jetpack.xpi" created.');
       console.log('Final size: ' + pretty(stats.size));
       done();
     });
@@ -108,4 +110,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('bundle', ['browserify', 'uglify']);
   grunt.registerTask('compile', ['bundle', 'chrome-ext', 'firefox-ext']);
+  grunt.registerTask('test', ['qunit']);
+  grunt.registerTask('default', ['test', 'compile']);
 };
