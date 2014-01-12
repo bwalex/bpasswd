@@ -66,6 +66,7 @@ module.exports = function(grunt) {
     archive.pipe(ostream);
 
     archive.append(fs.createReadStream('dist/bpasswd.min.js'), { name: 'bpasswd/bpasswd.js' });
+    archive.append(fs.createReadStream('common/global_controller.js'), { name: 'global_controller.js' });
     archive.bulk([
       { expand: true, cwd: 'chrome', src: ['**/*'] }
     ]);
@@ -87,6 +88,7 @@ module.exports = function(grunt) {
     wrench.rmdirSyncRecursive('tmp/firefox', true);
     wrench.copyDirSyncRecursive('firefox-jetpack/bpasswd2', 'tmp/firefox');
     fs.writeFileSync('tmp/firefox/data/bpasswd/bpasswd.js', fs.readFileSync('dist/bpasswd.min.js'));
+    fs.writeFileSync('tmp/firefox/data/global_controller.js', fs.readFileSync('common/global_controller.js'));
 
     grunt.util.spawn({
       cmd: 'cfx',
