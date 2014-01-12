@@ -30,11 +30,23 @@ module.exports = function(grunt) {
           'dist/bpasswd.min.js' : ['dist/bpasswd.js']
         }
       }
+    },
+
+    qunit: {
+      bpasswd: [
+        [
+          'common/bpasswd/test/hash_test.html',
+          'common/bpasswd/test/base64_test.html',
+          'common/bpasswd/test/blowfish_test.html',
+          'common/bpasswd/test/bcrypt_test.html'
+        ]
+      ]
     }
   });
 
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-qunit');
 
 
   grunt.registerTask('chrome-ext', 'Compile the BPasswd chrome extension.', function() {
