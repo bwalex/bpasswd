@@ -241,20 +241,16 @@
     encode: function(bytes) {
       var size = bytes.length;
       var str = "";
-      var byte_nbr = 0;
-      var char_nbr = 0;
-      var value = 0;
 
-      while (byte_nbr < size) {
-        value = ((value << 8) >>> 0) + bytes[byte_nbr++];
-        if (byte_nbr % 4 == 0) {
-          // Output value in base 85
-          var divisor = 52200625;//85 * 85 * 85 * 85;
-          while (divisor > 0) {
-            var idx = ((value/divisor) >>> 0) % 85;
-            str += EncDec.z85.fwdTable_[idx];
-            divisor = (divisor/85) >>> 0;
-          }
+      for (var i = 0; i < size; i += 4) {
+        var value = 0;
+        value |= ((bytes[i+0] & 0xFF) << 24);
+        value |= ((bytes[i+1] & 0xFF) << 16);
+        value |= ((bytes[i+2] & 0xFF) <<  8);
+        value |= ((bytes[i+3] & 0xFF)      );
+
+        for (divisor = 52200625; divisor > 0; divisor = (divisor/85) >>> 0) {
+          str += EncDec.z85.fwdTable_[(((value>>>0)/divisor) >>> 0) % 85];
         }
       }
 
@@ -264,40 +260,29 @@
     decode: function(str) {
       var bytes = [];
       var strLen = str.length;
-      var byte_nbr = 0;
-      var char_nbr = 0;
-      var value = 0;
+      var nBytes = strLen/5;
 
-  console.dir(EncDec.z85.revTable_);
-      while (char_nbr < strLen) {
-        var idx = String.fromCharCode(str.charCodeAt(char_nbr++));
-        value = ((value * 85) >>> 0) + EncDec.z85.revTable_[idx];
-        console.log("value " + value);
-        if (char_nbr % 5 == 0) {
-          var divisor = (256*256*256) >>> 0;
-          while (divisor > 0) {
-            bytes[byte_nbr++] = ((value/divisor) >>> 0) % 256;
-            console.log("Setting byte: " + bytes[byte_nbr-1] + " -- " + byte_nbr);
-            divisor = (divisor/256) >>> 0;
-          }
+      for (var i = 0; i < strLen; i += 5) {
+        var value = 0;
+        var divisor = 52200625;//85 * 85 * 85 * 85;
+
+        for (var j = 0; j < 5; j++) {
+          value += (EncDec.z85.revTable_[str.charAt(i+j)] * divisor) >>> 0;
+          divisor = (divisor/85) >>> 0;
         }
+
+        bytes.push((value >> 24) & 0xFF);
+        bytes.push((value >> 16) & 0xFF);
+        bytes.push((value >>  8) & 0xFF);
+        bytes.push((value      ) & 0xFF);
       }
       return bytes;
     }
-
-
   }
 
-  console.log("Populating rev table....");
-  console.log("Populating rev table....");
-  console.log("Populating rev table....");
-  console.log("Populating rev table....");
-  console.log("Populating rev table....");
   // populate reverse mapping table
   for (var i = 0; i < 85; i++)
     EncDec.z85.revTable_[EncDec.z85.fwdTable_[i]] = i;
-
-  console.dir(EncDec.z85.revTable_);
 
   return EncDec;
 }));

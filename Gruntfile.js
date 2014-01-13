@@ -37,6 +37,7 @@ module.exports = function(grunt) {
         [
           'common/bpasswd/test/hash_test.html',
           'common/bpasswd/test/base64_test.html',
+          'common/bpasswd/test/z85_test.html',
           'common/bpasswd/test/blowfish_test.html',
           'common/bpasswd/test/bcrypt_test.html'
         ]
