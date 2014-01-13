@@ -236,6 +236,8 @@
       "}", "@", "%", "$", "#"
     ],
 
+    revTable_: {},
+
     encode: function(bytes) {
       var size = bytes.length;
       var str = "";
@@ -257,8 +259,45 @@
       }
 
       return str;
+    },
+
+    decode: function(str) {
+      var bytes = [];
+      var strLen = str.length;
+      var byte_nbr = 0;
+      var char_nbr = 0;
+      var value = 0;
+
+  console.dir(EncDec.z85.revTable_);
+      while (char_nbr < strLen) {
+        var idx = String.fromCharCode(str.charCodeAt(char_nbr++));
+        value = ((value * 85) >>> 0) + EncDec.z85.revTable_[idx];
+        console.log("value " + value);
+        if (char_nbr % 5 == 0) {
+          var divisor = (256*256*256) >>> 0;
+          while (divisor > 0) {
+            bytes[byte_nbr++] = ((value/divisor) >>> 0) % 256;
+            console.log("Setting byte: " + bytes[byte_nbr-1] + " -- " + byte_nbr);
+            divisor = (divisor/256) >>> 0;
+          }
+        }
+      }
+      return bytes;
     }
+
+
   }
+
+  console.log("Populating rev table....");
+  console.log("Populating rev table....");
+  console.log("Populating rev table....");
+  console.log("Populating rev table....");
+  console.log("Populating rev table....");
+  // populate reverse mapping table
+  for (var i = 0; i < 85; i++)
+    EncDec.z85.revTable_[EncDec.z85.fwdTable_[i]] = i;
+
+  console.dir(EncDec.z85.revTable_);
 
   return EncDec;
 }));
