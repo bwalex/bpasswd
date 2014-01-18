@@ -31,12 +31,14 @@ exports.main = function(options) {
         ]
     });
 
+    /*
     var widget = require("sdk/widget").Widget({
         label: "BPasswd2",
         id: "bpasswd2-widget",
         contentURL: data.url("key24.png"),
         panel: pane
     });
+    */
 
     var tbb = require("toolbarwidget").ToolbarWidget({
         toolbarID: "nav-bar",
