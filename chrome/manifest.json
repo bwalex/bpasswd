@@ -3,6 +3,11 @@
   "version": "2.0",
   "manifest_version": 2,
   "description": "A strong password generator using bcrypt for key derivation",
+  "icons": {
+    "16":  "key16.png",
+    "48":  "key48.png",
+    "128": "key128.png"
+  },
   "incognito": "split",
   "browser_action": {
     "default_icon": "icon.png",
