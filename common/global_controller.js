@@ -9,7 +9,7 @@
         module.exports = factory(require('lodash'));
     } else {
         // Browser globals (root is window)
-        root.BPasswd = factory(root._);
+        root.GlobalController = factory(root._);
     }
 }(this, function (_) {
 
