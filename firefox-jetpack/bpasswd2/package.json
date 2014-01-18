@@ -1,6 +1,6 @@
 {
   "name": "bpasswd2",
-  "title": "bpasswd2",
+  "title": "BPasswd2",
   "id": "jid0-z9mqGoLLFCgUUnGyP5bb97JbxAs",
   "description": "A strong password generator using bcrypt for key derivation in a convenient toolbar.",
   "author": "Alex Hornung",
