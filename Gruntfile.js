@@ -51,31 +51,33 @@ module.exports = function(grunt) {
 
 
   grunt.registerTask('chrome-ext', 'Compile the BPasswd chrome extension.', function() {
-    var done = this.async();
+    var done = this.async(),
+        archive = archiver('zip'),
+        ostream = fs.createWriteStream('dist/bpasswd-chrome.zip');
 
-    if (!fs.existsSync('tmp'))
-      fs.mkdirSync('tmp');
-    wrench.rmdirSyncRecursive('tmp/chrome', true);
-    wrench.copyDirSyncRecursive('chrome', 'tmp/chrome');
-    fs.writeFileSync('tmp/chrome/bpasswd/bpasswd.js', fs.readFileSync('dist/bpasswd.min.js'));
-    fs.writeFileSync('tmp/chrome/global_controller.js', fs.readFileSync('common/global_controller.js'));
+    archive.on('error', function(err) {
+      grunt.log.error(err);
+      grunt.fail.warn('Archiving failed.');
+    });
 
-    grunt.util.spawn({
-      cmd: 'chromium',
-      args: [
-        '--pack-extension=tmp/chrome',
-        '--pack-extension-key=/home/alex/chrome-bpasswd.pem'
-      ]
-    }, function(err, res, code) {
-      if (err)
-        throw(err);
-      fs.writeFileSync('dist/bpasswd-chrome.crx', fs.readFileSync('tmp/chrome.crx'));
-      stats = fs.statSync('dist/bpasswd-chrome.crx');
-      grunt.log.writeln('File "dist/bpasswd-chrome.crx" created.');
-      console.log('Final size: ' + pretty(stats.size));
+    ostream.on('close', function() {
       done();
     });
 
+    archive.pipe(ostream);
+
+    archive.append(fs.createReadStream('dist/bpasswd.min.js'), { name: 'bpasswd/bpasswd.js' });
+    archive.append(fs.createReadStream('common/global_controller.js'), { name: 'global_controller.js' });
+    archive.bulk([
+      { expand: true, cwd: 'chrome', src: ['**/*'] }
+    ]);
+
+    archive.finalize(function(err, bytes) {
+      if (err)
+        throw(err);
+      grunt.log.writeln('File "dist/bpasswd-chrome.zip" created.');
+      console.log('Final size: ' + pretty(bytes));
+    });
   });
 
 
