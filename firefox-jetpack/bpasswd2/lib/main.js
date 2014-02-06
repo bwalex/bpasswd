@@ -25,7 +25,7 @@ exports.main = function(options) {
         contentURL: data.url("panel.html"),
         contentScriptFile: [
             data.url("bpasswd/bpasswd.js"),
-            data.url("vendor/jquery-2.0.3.min.js"),
+            data.url("vendor/jquery-2.1.0.js"),
             data.url("vendor/number-polyfill.js"),
             data.url("panel.js")
         ]
@@ -116,10 +116,10 @@ exports.main = function(options) {
             onReady: function(tab) {
                 worker = tab.attach({
                     contentScriptFile: [
-                        data.url("vendor/lodash.min.js"),
-                        data.url("vendor/jquery-2.0.3.min.js"),
+                        data.url("vendor/lodash.js"),
+                        data.url("vendor/jquery-2.1.0.js"),
                         data.url("vendor/number-polyfill.js"),
-                        data.url("vendor/backbone-min.js"),
+                        data.url("vendor/backbone.js"),
                         data.url("global_controller.js"),
                         data.url("options.js")
                     ]
