@@ -81,6 +81,8 @@ module.exports = function(grunt) {
   });
 
 
+  // The Firefox guys are very biased against minified code, so nothing in the
+  // firefox extension is minifed.
   grunt.registerTask('firefox-ext', 'Compile the BPasswd firefox addon SDK extension.', function() {
     var done = this.async();
 
@@ -88,7 +90,7 @@ module.exports = function(grunt) {
       fs.mkdirSync('tmp');
     wrench.rmdirSyncRecursive('tmp/firefox', true);
     wrench.copyDirSyncRecursive('firefox-jetpack/bpasswd2', 'tmp/firefox');
-    fs.writeFileSync('tmp/firefox/data/bpasswd/bpasswd.js', fs.readFileSync('dist/bpasswd.min.js'));
+    fs.writeFileSync('tmp/firefox/data/bpasswd/bpasswd.js', fs.readFileSync('dist/bpasswd.js'));
     fs.writeFileSync('tmp/firefox/data/global_controller.js', fs.readFileSync('common/global_controller.js'));
 
     grunt.util.spawn({

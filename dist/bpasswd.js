@@ -1,4 +1,4 @@
-!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.BPasswd=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.BPasswd=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
@@ -7,7 +7,7 @@
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like enviroments that support module.exports,
         // like Node.
-        module.exports = factory(require('./blowfish'));
+        module.exports = factory(_dereq_('./blowfish'));
     } else {
         // Browser globals (root is window)
         root.BCrypt = factory(root.Blowfish);
@@ -47,7 +47,7 @@
   };
 }));
 
-},{"./blowfish":2}],2:[function(require,module,exports){
+},{"./blowfish":2}],2:[function(_dereq_,module,exports){
 // Based on the C implementation by Bruce Schneier
 // eksExpandKey based on the paper by Niels Provos, USENIX, 1999
 
@@ -59,7 +59,7 @@
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like enviroments that support module.exports,
         // like Node.
-        module.exports = factory(require('./enc_dec'), require('./crypto_helper'));
+        module.exports = factory(_dereq_('./enc_dec'), _dereq_('./crypto_helper'));
     } else {
         // Browser globals (root is window)
         root.Blowfish = factory(root.EncDec, root.CryptoHelper);
@@ -546,7 +546,7 @@
   };
 }));
 
-},{"./crypto_helper":4,"./enc_dec":5}],3:[function(require,module,exports){
+},{"./crypto_helper":4,"./enc_dec":5}],3:[function(_dereq_,module,exports){
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
@@ -555,10 +555,10 @@
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like enviroments that support module.exports,
         // like Node.
-        module.exports = factory(require('./bcrypt'),
-                                 require('./hmac'),
-                                 require('./enc_dec'),
-                                 require('./sha256'));
+        module.exports = factory(_dereq_('./bcrypt'),
+                                 _dereq_('./hmac'),
+                                 _dereq_('./enc_dec'),
+                                 _dereq_('./sha256'));
     } else {
         // Browser globals (root is window)
         root.BPasswd = factory(root.BCrypt,
@@ -590,7 +590,7 @@
   };
 }));
 
-},{"./bcrypt":1,"./enc_dec":5,"./hmac":6,"./sha256":7}],4:[function(require,module,exports){
+},{"./bcrypt":1,"./enc_dec":5,"./hmac":6,"./sha256":7}],4:[function(_dereq_,module,exports){
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
@@ -656,7 +656,7 @@
   };
 }));
 
-},{}],5:[function(require,module,exports){
+},{}],5:[function(_dereq_,module,exports){
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
@@ -946,7 +946,7 @@
   return EncDec;
 }));
 
-},{}],6:[function(require,module,exports){
+},{}],6:[function(_dereq_,module,exports){
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
@@ -1012,7 +1012,7 @@
   };
 }));
 
-},{}],7:[function(require,module,exports){
+},{}],7:[function(_dereq_,module,exports){
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 /*  SHA-256 implementation in JavaScript | (c) Chris Veness 2002-2010 | www.movable-type.co.uk    */
 /*   - see http://csrc.nist.gov/groups/ST/toolkit/secure_hashing.html                             */
@@ -1027,7 +1027,7 @@
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like enviroments that support module.exports,
         // like Node.
-        module.exports = factory(require('./enc_dec'));
+        module.exports = factory(_dereq_('./enc_dec'));
     } else {
         // Browser globals (root is window)
         root.Sha256 = factory(root.EncDec);
