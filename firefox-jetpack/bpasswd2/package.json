@@ -5,7 +5,7 @@
   "description": "A strong password generator using bcrypt for key derivation in a convenient toolbar.",
   "author": "Alex Hornung",
   "license": "MPL 2.0",
-  "version": "2.1",
+  "version": "2.1.1",
   "contributors": [],
   "url": "",
   "dependencies": [
