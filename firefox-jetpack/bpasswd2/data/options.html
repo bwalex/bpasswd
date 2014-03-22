@@ -25,18 +25,18 @@
 </script>
 
 <script type="text/template" id="opt-simple-view-tmpl">
-    <%= name %>
+    <%- name %>
 </script>
 
 <script type="text/template" id="opt-expanded-view-tmpl">
     <fieldset>
         <p>
             <label for="cost"><span>Bcrypt cost factor:</span></label>
-            <input type="number" id="cost" min="1" max="100" step="1" value="<%= cost %>"/>
+            <input type="number" id="cost" min="1" max="100" step="1" value="<%- cost %>"/>
         </p>
         <p>
             <label for="max_len"><span>Maximum password length:</span></label>
-            <input type="number" id="max_len" min="4" max="64" step="1" value="<%= max_len %>"/>
+            <input type="number" id="max_len" min="4" max="64" step="1" value="<%- max_len %>"/>
         </p>
         <p>
             <label for="gen_method"><span>Mapping method:</span></label>
@@ -57,15 +57,15 @@
     <fieldset>
         <p>
             <label for="hotkey"><span>Hotkey:</span></label>
-            <input type="text" id="hotkey" value="<%= hotkey %>"/>
+            <input type="text" id="hotkey" value="<%- hotkey %>"/>
         </p>
         <p>
             <label for="global_cost"><span>Bcrypt cost factor:</span></label>
-            <input type="number" id="global_cost" min="1" max="100" step="1" value="<%= cost %>"/>
+            <input type="number" id="global_cost" min="1" max="100" step="1" value="<%- cost %>"/>
         </p>
         <p>
             <label for="global_max_len"><span>Maximum password length:</span></label>
-            <input type="number" id="global_max_len" min="4" max="64" step="1" value="<%= max_len %>"/>
+            <input type="number" id="global_max_len" min="4" max="64" step="1" value="<%- max_len %>"/>
         </p>
         <p>
             <label for="global_gen_method"><span>Default mapping method:</span></label>
