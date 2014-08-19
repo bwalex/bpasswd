@@ -46,7 +46,8 @@ app.GlobalOptView = Backbone.View.extend({
 app.Opt = Backbone.Model.extend({
     defaults: {
         'max_len'    : 32,
-        'gen_method' : 'base64'
+        'gen_method' : 'base64',
+	'generation' : 0
     }
 });
 
@@ -127,6 +128,7 @@ app.OptExpandedView = Backbone.View.extend({
         this.model.set({
             "cost"       : $(this.el).find('#cost').val(),
             "gen_method" : $(this.el).find('#gen_method').val(),
+            "generation" : $(this.el).find('#generation').val(),
             "max_len"    : $(this.el).find('#max_len').val(),
         });
         this.remove();
@@ -170,7 +172,8 @@ app.OptListView = Backbone.View.extend({
                 name: $(ev.currentTarget).val(),
                 'cost'       : app.globalOpt.toJSON()['cost'],
                 'max_len'    : app.globalOpt.toJSON()['max_len'],
-                'gen_method' : app.globalOpt.toJSON()['gen_method']
+                'gen_method' : app.globalOpt.toJSON()['gen_method'],
+                'generation' : app.globalOpt.toJSON()['generation']
             });
             this.collection.add(opt);
             $(ev.currentTarget).val("");

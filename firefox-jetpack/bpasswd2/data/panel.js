@@ -7,6 +7,7 @@ var updateOpts = function(onlyGlobal) {
     var cost = prefs.global_options.cost;
     var max_len = prefs.global_options.max_len;
     var gen_method = prefs.global_options.gen_method;
+    var generation = 0;
 
     /* Apply overrides */
     if (!onlyGlobal && typeof(prefs.salt_options[salt]) !== "undefined") {
@@ -17,11 +18,14 @@ var updateOpts = function(onlyGlobal) {
             max_len = prefs.salt_options[salt]["max_len"];
         if (typeof(prefs.salt_options[salt]["gen_method"]) !== "undefined")
             gen_method = prefs.salt_options[salt]["gen_method"];
+        if (typeof(prefs.salt_options[salt]["generation"]) !== "undefined")
+            generation = prefs.salt_options[salt]["generation"];
     }
 
     $('#more_max_len').val(max_len);
     $('#more_cost').val(cost);
     $('#more_gen_method').val(gen_method);
+    $('#more_generation').val(generation);
 
     if (found_salt)
         $('#found_salt_config').show();
@@ -49,8 +53,9 @@ $('#bpasswd-derive-key').click(function() {
     var cost = $('#more_cost').val();
     var max_len = $('#more_max_len').val();
     var gen_method = $('#more_gen_method').val();
+    var generation = $('#more_generation').val();
 
-    var dkey = BPasswd.generate(salt, pass, cost, gen_method).substring(0, max_len);
+    var dkey = BPasswd.generate(salt, pass, cost, gen_method, generation).substring(0, max_len);
     $('#bpasswd-dkey').val(dkey);
     $('#bpasswd-dkey').focus();
     $('#bpasswd-dkey').select();
@@ -66,6 +71,7 @@ $('#bpasswd-save-options').click(function() {
     var cost = $('#more_cost').val();
     var max_len = $('#more_max_len').val();
     var gen_method = $('#more_gen_method').val();
+    var generation = $('#more_generation').val();
 
     if (salt == "")
         return;
@@ -74,6 +80,7 @@ $('#bpasswd-save-options').click(function() {
         prefs.salt_options[salt] = {};
 
     prefs.salt_options[salt].gen_method = gen_method;
+    prefs.salt_options[salt].generation = generation;
     prefs.salt_options[salt].cost = cost;
     prefs.salt_options[salt].max_len = max_len;
 

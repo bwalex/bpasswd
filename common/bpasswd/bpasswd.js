@@ -20,11 +20,16 @@
 }(this, function (BCrypt, HMAC, EncDec, Sha256) {
 
   return {
-    generate: function(salt, password, cost, gen_method) {
+    generate: function(salt, password, cost, gen_method, generation) {
       if (typeof(cost) === "undefined")
         cost = 6;
       if (typeof(gen_method) === "undefined")
         gen_method = "base64";
+      if (typeof(generation) === "undefined")
+        generation = "";
+
+      if (generation != "" && generation != 0)
+        salt += "@" + generation;
 
       var h = new HMAC(Sha256);
       var b = new BCrypt();
