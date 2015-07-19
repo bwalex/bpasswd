@@ -53,12 +53,13 @@ $('#bpasswd-derive-key').click(function() {
     var dkey = BPasswd.generate(salt, pass, cost, gen_method, generation).substring(0, max_len);
     $('#bpasswd-dkey').val(dkey);
     $('#bpasswd-dkey').focus();
-    $('#bpasswd-dkey').select();
+    //$('#bpasswd-dkey').select();
 
     /* Mobile Safari select() */
     var el = document.getElementById('bpasswd-dkey');
-    el.selectionStart = 0;
-    el.selectionEnd = el.value.length;
+    el.setSelectionRange(0, dkey.length);
+    //el.selectionStart = 0;
+    //el.selectionEnd = el.value.length;
 
     if (document.queryCommandSupported('copy')) {
       console.log("Clipboard copy using execCommand");
