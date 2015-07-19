@@ -1,0 +1,32 @@
+{
+  "name": "BPasswd",
+  "icons": [
+    {
+      "src": "img/square/touch-icon-iphone.png",
+      "sizes": "60x60",
+      "type": "image/png",
+      "density": "1.0"
+    },
+    {
+      "src": "img/square/touch-icon-ipad.png",
+      "sizes": "76x76",
+      "type": "image/png",
+      "density": "1.5"
+    },
+    {
+      "src": "img/square/touch-icon-ipad-retina.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "density": "3.0"
+    },
+    {
+      "src": "img/square/touch-icon-highres.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "density": "4.0"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "standalone",
+  "orientation": "landscape"
+}

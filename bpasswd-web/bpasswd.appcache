@@ -1,0 +1,28 @@
+CACHE MANIFEST
+# v1 2011-08-14
+CACHE:
+
+index.html
+
+options.css
+options.html
+options.js
+panel.css
+panel.js
+
+vendor/backbone-min.js
+vendor/jquery-2.0.3.min.js
+vendor/lodash.min.js
+vendor/number-polyfill.css
+vendor/number-polyfill.js
+vendor/sld.js
+vendor/uri.js
+
+bpasswd.min.js
+global_controller.js
+
+img/square/touch-icon-iphone.png
+img/square/touch-icon-iphone-retina.png
+img/square/touch-icon-ipad.png
+img/square/touch-icon-ipad-retina.png
+img/square/touch-icon-highres.png
