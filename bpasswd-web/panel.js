@@ -93,6 +93,12 @@ $('#bpasswd-show-pwd').change(function() {
     document.getElementById('bpasswd-password').type = $('#bpasswd-show-pwd').is(':checked') ? "text" : "password";
 });
 
+function qs(key) {
+    key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+    var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+    return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+}
+
 $(function() {
     $('input[type="number"]').inputNumber();
     $('#more-options').hide();
@@ -105,5 +111,23 @@ $(function() {
 
     $('#bpasswd-password').focus();
     $('#saved_salt_config').hide();
+
+    (function() {
+      var url = [location.protocol, '//', location.host, location.pathname].join('');
+
+      var a = '<a href="javascript:(function(){	open(\''+url+'?url=\' + window.location.href,\'targetname\',\'height=500,width=500\');})()" title="BPasswd">BPasswd Bookmarklet</a>';
+      $(a).appendTo('#bookmarklet-div');
+    })();
+
+    var q = qs('url');
+    if (q) {
+      console.log("Passed URL query parameter: " + q);
+      var u = URI(q);
+      var domain = u.domain();
+      var tld = u.tld();
+      var url = domain.substring(0, domain.length-tld.length-1);
+      $('#bpasswd-salt').val(url);
+    }
+
     updateOpts(false);
 });
