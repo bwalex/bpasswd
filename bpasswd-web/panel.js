@@ -55,6 +55,11 @@ $('#bpasswd-derive-key').click(function() {
     $('#bpasswd-dkey').focus();
     $('#bpasswd-dkey').select();
 
+    /* Mobile Safari select() */
+    var el = document.getElementById('bpasswd-dkey');
+    el.selectionStart = 0;
+    el.selectionEnd = el.value.length;
+
     if (document.queryCommandSupported('copy')) {
       console.log("Clipboard copy using execCommand");
       document.execCommand('copy');
