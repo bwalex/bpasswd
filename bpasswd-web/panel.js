@@ -58,9 +58,6 @@ $('#bpasswd-derive-key').click(function() {
     if (document.queryCommandSupported('copy')) {
       console.log("Clipboard copy using execCommand");
       document.execCommand('copy');
-    } else if (ClipboardEvent && ClipboardEvent.clipboardData && ClipboardEvent.clipboardData.setData) {
-      console.log("Clipboard copy using ClipboardEvent.clipboardData.setData");
-      ClipboardEvent.clipboardData.setData(dkey);
     } else if (window.clipboardData && window.clipboardData.setData) {
       console.log("Clipboard copy using window.clipboardData.setData");
       window.clipboardData.setData(dkey);
