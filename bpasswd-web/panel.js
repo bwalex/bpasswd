@@ -111,6 +111,34 @@ function qs(key) {
     return match && decodeURIComponent(match[1].replace(/\+/g, " "));
 }
 
+function find_salt(prefs, url) {
+  var u = URI(url);
+  var domain = u.domain();
+  console.log("domain: " + domain);
+  var tld = u.tld();
+  var site_name = domain.substring(0, domain.length-tld.length-1);
+
+  if (typeof(prefs.salt_options[site_name]) !== "undefined") {
+    return site_name;
+  } else {
+    for (var s in prefs.salt_options) {
+      if (typeof(prefs.salt_options[s]["aliases"]) !== "undefined") {
+        console.log(prefs.salt_options[s]["aliases"]);
+        for (var a in prefs.salt_options[s]["aliases"]) {
+          if (prefs.salt_options[s]["aliases"][a].length == 0)
+            continue;
+          var re = new RegExp(prefs.salt_options[s]["aliases"][a], "i");
+          console.log(re);
+          if (re.test(domain)) {
+            return s;
+          }
+        }
+      }
+    }
+    return site_name;
+  }
+}
+
 $(function() {
     $('input[type="number"]').inputNumber();
     $('#more-options').hide();
@@ -134,11 +162,7 @@ $(function() {
     var q = qs('url');
     if (q) {
       console.log("Passed URL query parameter: " + q);
-      var u = URI(q);
-      var domain = u.domain();
-      var tld = u.tld();
-      var url = domain.substring(0, domain.length-tld.length-1);
-      $('#bpasswd-salt').val(url);
+      $('#bpasswd-salt').val(find_salt(prefs, q));
     }
 
     updateOpts(false);

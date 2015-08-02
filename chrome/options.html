@@ -51,6 +51,10 @@
             <input type="number" id="generation" min="1" max="1000" step="1" value="<%- generation %>"/>
         </p>
         <p>
+            <label for="aliases"><span>Aliases:</span></label>
+            <textarea id="aliases"><%= aliases.join('\n') %></textarea>
+        </p>
+        <p>
             <label for="delete_opt_btn"><span>&nbsp;</span></label>
             <button id="delete_opt_btn">Delete this entry</button>
         </p>

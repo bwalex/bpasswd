@@ -48,7 +48,8 @@ app.Opt = Backbone.Model.extend({
     defaults: {
         'max_len'    : 32,
         'gen_method' : 'base64',
-	'generation' : 0
+	'generation' : 0,
+        'aliases'    : []
     }
 });
 
@@ -105,6 +106,8 @@ app.OptExpandedView = Backbone.View.extend({
     events: {
         'click #delete_opt_btn' : 'clickDelete',
         'change input'          : 'enableSave',
+        'change textarea'       : 'enableSave',
+        'keyup  textarea'       : 'enableSave',
         'change select'         : 'enableSave'
     },
 
@@ -131,6 +134,7 @@ app.OptExpandedView = Backbone.View.extend({
             "gen_method" : $(this.el).find('#gen_method').val(),
             "generation" : $(this.el).find('#generation').val(),
             "max_len"    : $(this.el).find('#max_len').val(),
+            "aliases"    : _.filter($(this.el).find('#aliases').val().split("\n"), 'length'),
         });
         this.remove();
     },
@@ -174,7 +178,8 @@ app.OptListView = Backbone.View.extend({
                 'cost'       : app.globalOpt.toJSON()['cost'],
                 'max_len'    : app.globalOpt.toJSON()['max_len'],
                 'gen_method' : app.globalOpt.toJSON()['gen_method'],
-                'generation' : app.globalOpt.toJSON()['generation']
+                'generation' : app.globalOpt.toJSON()['generation'],
+                'aliases'    : []
             });
             this.collection.add(opt);
             $(ev.currentTarget).val("");
