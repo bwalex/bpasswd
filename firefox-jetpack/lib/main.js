@@ -17,8 +17,8 @@ exports.main = function(options) {
 
     var _domain = function(prefs, url) {
         var u = URL(url);
-        var domain = u.hostname;
-        var tld = getTLD(url);
+        var domain = u.hostname || "";
+        var tld = getTLD(url) || "";
         var site_name = domain.substring(0, domain.length-tld.length-1);
 
         if (typeof(prefs.salt_options[site_name]) !== "undefined") {
