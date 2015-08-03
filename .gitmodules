@@ -1,3 +1,0 @@
-[submodule "firefox-jetpack/packages/toolbarwidget"]
-	path = firefox-jetpack/packages/toolbarwidget
-	url = https://github.com/Rob--W/toolbarwidget-jplib.git

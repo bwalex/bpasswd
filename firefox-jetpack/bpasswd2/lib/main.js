@@ -1,23 +1,24 @@
 // This is an active module of the bpasswd Add-on
 exports.main = function(options) {
 
-    var data = require("sdk/self").data;
-    var tabs = require("sdk/tabs");
-    var clipboard = require("sdk/clipboard");
-    var prefs = require("sdk/preferences/service");
-    var { Hotkey } = require("sdk/hotkeys");
-    var _ = require("lodash");
-    var { URI } = require("./uri");
+    const { id }         = require("sdk/self");
+    var data             = require("sdk/self").data;
+    var tabs             = require("sdk/tabs");
+    var clipboard        = require("sdk/clipboard");
+    var prefs            = require("sdk/preferences/service");
+    var { Hotkey }       = require("sdk/hotkeys");
+    var { URL, getTLD }  = require("sdk/url");
+    var { ToggleButton } = require('sdk/ui/button/toggle');
+    var _                = require("./lodash");
 
-    const { id } = require("sdk/self");
-    const PREF_PATH = "extensions." + id + ".";
+    const PREF_PATH      = "extensions." + id + ".";
 
     var _pref = function(p) { return PREF_PATH + p };
 
     var _domain = function(prefs, url) {
-        var u = URI(url);
-        var domain = u.domain();
-        var tld = u.tld();
+        var u = URL(url);
+        var domain = u.hostname;
+        var tld = getTLD(url);
         var site_name = domain.substring(0, domain.length-tld.length-1);
 
         if (typeof(prefs.salt_options[site_name]) !== "undefined") {
@@ -41,6 +42,14 @@ exports.main = function(options) {
         }
     }
 
+    var tbb = ToggleButton({
+        label: "BPasswd2",
+        id: "bpasswd2-button",
+        icon: {
+          "24": data.url("key24.png")
+        },
+        onChange: handleChange
+    });
 
     var pane = require("sdk/panel").Panel({
         contentURL: data.url("panel.html"),
@@ -49,25 +58,19 @@ exports.main = function(options) {
             data.url("vendor/jquery-2.1.0.js"),
             data.url("vendor/number-polyfill.js"),
             data.url("panel.js")
-        ]
+        ],
+        onHide: function() {
+          tbb.state('window', {checked: false});
+        }
     });
 
-    /*
-    var widget = require("sdk/widget").Widget({
-        label: "BPasswd2",
-        id: "bpasswd2-widget",
-        contentURL: data.url("key24.png"),
-        panel: pane
-    });
-    */
-
-    var tbb = require("toolbarwidget").ToolbarWidget({
-        toolbarID: "nav-bar",
-        label: "BPasswd2",
-        id: "bpasswd2-button",
-        contentURL: data.url("key24.png"),
-        panel: pane
-    });
+    function handleChange(state) {
+        if (state.checked) {
+            pane.show({
+                position: tbb
+            });
+        }
+    }
 
     if (options.loadReason == "install") {
         var defs = data.load("default_opts.json");

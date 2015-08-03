@@ -1,14 +1,15 @@
 {
   "name": "bpasswd2",
   "title": "BPasswd2",
-  "id": "jid0-z9mqGoLLFCgUUnGyP5bb97JbxAs",
+  "id": "jid0-z9mqGoLLFCgUUnGyP5bb97JbxAs@jetpack",
   "description": "A strong password generator using bcrypt for key derivation in a convenient toolbar.",
   "author": "Alex Hornung",
-  "license": "MPL 2.0",
-  "version": "2.2.2",
-  "contributors": [],
-  "url": "",
-  "dependencies": [
-    "toolbarwidget"
-  ]
+  "license": "MIT",
+  "version": "2.3.0",
+  "homepage": "https://www.alexhornung.com/code/bpasswd/",
+  "permissions": {
+    "private-browsing": true
+  },
+  "icon": "icon.png",
+  "main": "lib/main.js"
 }
