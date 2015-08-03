@@ -90,7 +90,7 @@ module.exports = function(grunt) {
     if (!fs.existsSync('tmp'))
       fs.mkdirSync('tmp');
     wrench.rmdirSyncRecursive('tmp/firefox', true);
-    wrench.copyDirSyncRecursive('firefox-jetpack/bpasswd2', 'tmp/firefox');
+    wrench.copyDirSyncRecursive('firefox-jetpack', 'tmp/firefox');
     fs.writeFileSync('tmp/firefox/data/bpasswd/bpasswd.js', fs.readFileSync('dist/bpasswd.js'));
     fs.writeFileSync('tmp/firefox/data/global_controller.js', fs.readFileSync('common/global_controller.js'));
 
