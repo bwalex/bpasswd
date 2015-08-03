@@ -1,8 +1,9 @@
-var path = require("path");
-var wrench = require("wrench");
-var fs = require("fs");
+var path     = require("path");
+var wrench   = require("wrench");
+var fs       = require("fs-extra");
 var archiver = require("archiver");
-var pretty = require("prettysize");
+var pretty   = require("prettysize");
+var glob     = require("glob");
 
 module.exports = function(grunt) {
   grunt.initConfig({
@@ -94,21 +95,31 @@ module.exports = function(grunt) {
     fs.writeFileSync('tmp/firefox/data/global_controller.js', fs.readFileSync('common/global_controller.js'));
 
     grunt.util.spawn({
-      cmd: 'cfx',
+      cmd: 'jpm',
       args: [
         'xpi',
-        '--package-path=firefox-jetpack/packages',
-        '--pkgdir=tmp/firefox',
-        '--output-file=dist/bpasswd-jetpack.xpi'
-      ]
+      ],
+      opts: {
+        'cwd': 'tmp/firefox',
+      }
     }, function(err, res, code) {
       if (err)
         throw(err);
 
-      stats = fs.statSync('dist/bpasswd-jetpack.xpi');
-      grunt.log.writeln('File "dist/bpasswd-jetpack.xpi" created.');
-      console.log('Final size: ' + pretty(stats.size));
-      done();
+      glob('tmp/firefox/*.xpi', {}, function(err, files) {
+        if (err)
+          throw(err);
+        if (files.length < 1)
+          throw("Couldn't find generated .xpi!");
+
+        console.log("Generated file: " + files[0]);
+        fs.writeFileSync('dist/bpasswd-jetpack.xpi', fs.readFileSync(files[0]));
+        stats = fs.statSync('dist/bpasswd-jetpack.xpi');
+        grunt.log.writeln('File "dist/bpasswd-jetpack.xpi" created.');
+        console.log('Final size: ' + pretty(stats.size));
+        done();
+      });
+
     });
   });
 
