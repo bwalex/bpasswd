@@ -1,6 +1,6 @@
 {
   "name": "BPasswd",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "manifest_version": 2,
   "description": "A strong password generator using bcrypt for key derivation",
   "icons": {
