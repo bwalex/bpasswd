@@ -17,29 +17,27 @@ exports.main = function(options) {
 
     var _domain = function(prefs, url) {
         var u = URL(url);
-        var domain = u.hostname || "";
         var tld = getTLD(url) || "";
-        var site_name = domain.substring(0, domain.length-tld.length-1);
+        var hostname = (u.hostname || "");
+        var domain = hostname.substring(0, hostname.length-tld.length-1);
+        var parts = domain.split(".");
+        var site_name = parts[parts.length-1];
 
-        if (typeof(prefs.salt_options[site_name]) !== "undefined") {
-            return site_name;
-        } else {
-            for (var s in prefs.salt_options) {
-                if (typeof(prefs.salt_options[s]["aliases"]) !== "undefined") {
-                    console.log(prefs.salt_options[s]["aliases"]);
-                    for (var a in prefs.salt_options[s]["aliases"]) {
-                        if (prefs.salt_options[s]["aliases"][a].length == 0)
-                            continue;
-                        var re = new RegExp(prefs.salt_options[s]["aliases"][a], "i");
-                        console.log(re);
-                        if (re.test(domain)) {
-                            return s;
-                        }
+        for (var s in prefs.salt_options) {
+            if (typeof(prefs.salt_options[s]["aliases"]) !== "undefined") {
+                console.log(prefs.salt_options[s]["aliases"]);
+                for (var a in prefs.salt_options[s]["aliases"]) {
+                    if (prefs.salt_options[s]["aliases"][a].length == 0)
+                        continue;
+                    var re = new RegExp(prefs.salt_options[s]["aliases"][a], "i");
+                    console.log(re);
+                    if (re.test(hostname)) {
+                        return s;
                     }
                 }
             }
-            return site_name;
         }
+        return site_name;
     }
 
     var tbb = ToggleButton({

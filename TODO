@@ -1,5 +1,0 @@
-firefox:
- - fix hostname vs domain name
-
-all others as well:
- - (developer.mozilla.org > mozilla) search path

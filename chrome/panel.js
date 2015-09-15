@@ -104,27 +104,22 @@ var _domain = function(prefs, url) {
     var u = URI(url);
     var domain = u.domain();
     var tld = u.tld();
+    var hostname = u.hostname();
     var site_name = domain.substring(0, domain.length-tld.length-1);
 
-    if (typeof(prefs.salt_options[site_name]) !== "undefined") {
-        return site_name;
-    } else {
-        for (var s in prefs.salt_options) {
-            if (typeof(prefs.salt_options[s]["aliases"]) !== "undefined") {
-                console.log(prefs.salt_options[s]["aliases"]);
+    for (var s in prefs.salt_options) {
+        if (typeof(prefs.salt_options[s]["aliases"]) !== "undefined") {
+            for (var a in prefs.salt_options[s]["aliases"]) {
                 if (prefs.salt_options[s]["aliases"][a].length == 0)
                     continue;
-                for (var a in prefs.salt_options[s]["aliases"]) {
-                    var re = new RegExp(prefs.salt_options[s]["aliases"][a], "i");
-                    console.log(re);
-                    if (re.test(domain)) {
-                        return s;
-                    }
+                var re = new RegExp(prefs.salt_options[s]["aliases"][a], "i");
+                if (re.test(hostname)) {
+                    return s;
                 }
             }
         }
-        return site_name;
     }
+    return site_name;
 }
 
 chrome.storage.sync.get(null, function(items) {
@@ -133,7 +128,7 @@ chrome.storage.sync.get(null, function(items) {
     $('#saved_salt_config').hide();
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         if (tabs.length > 0) {
-            $('#bpasswd-salt').val(_domain(prefs.salt_options, tabs[0].url));
+            $('#bpasswd-salt').val(_domain(prefs, tabs[0].url));
             updateOpts(false);
         }
     });

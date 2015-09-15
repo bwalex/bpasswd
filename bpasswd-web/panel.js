@@ -114,29 +114,23 @@ function qs(key) {
 function find_salt(prefs, url) {
   var u = URI(url);
   var domain = u.domain();
-  console.log("domain: " + domain);
+  var hostname = u.hostname();
   var tld = u.tld();
   var site_name = domain.substring(0, domain.length-tld.length-1);
 
-  if (typeof(prefs.salt_options[site_name]) !== "undefined") {
-    return site_name;
-  } else {
-    for (var s in prefs.salt_options) {
-      if (typeof(prefs.salt_options[s]["aliases"]) !== "undefined") {
-        console.log(prefs.salt_options[s]["aliases"]);
-        for (var a in prefs.salt_options[s]["aliases"]) {
-          if (prefs.salt_options[s]["aliases"][a].length == 0)
-            continue;
-          var re = new RegExp(prefs.salt_options[s]["aliases"][a], "i");
-          console.log(re);
-          if (re.test(domain)) {
-            return s;
-          }
+  for (var s in prefs.salt_options) {
+    if (typeof(prefs.salt_options[s]["aliases"]) !== "undefined") {
+      for (var a in prefs.salt_options[s]["aliases"]) {
+        if (prefs.salt_options[s]["aliases"][a].length == 0)
+          continue;
+        var re = new RegExp(prefs.salt_options[s]["aliases"][a], "i");
+        if (re.test(hostname)) {
+          return s;
         }
       }
     }
-    return site_name;
   }
+  return site_name;
 }
 
 $(function() {
