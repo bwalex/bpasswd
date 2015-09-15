@@ -60,3 +60,7 @@ h2 {
     border-bottom: 1px solid #666;
     padding-bottom: 5px;
 }
+
+#back-btn {
+  font-size: 125%;
+}
